@@ -21,7 +21,6 @@
 #include "libyuv/planar_functions.h"  // For WebRTC I420Rect, CopyPlane. b/618
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -1039,7 +1038,6 @@ int ConvertToI420(const uint8_t* sample,
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_CONVERT_H_

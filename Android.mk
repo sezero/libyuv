@@ -3,62 +3,52 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_CPP_EXTENSION := .cc
-
 LOCAL_SRC_FILES := \
-    source/compare.cc           \
-    source/compare_common.cc    \
-    source/compare_gcc.cc       \
-    source/compare_msa.cc       \
-    source/compare_neon.cc      \
-    source/compare_neon64.cc    \
-    source/compare_win.cc       \
-    source/convert.cc           \
-    source/convert_argb.cc      \
-    source/convert_from.cc      \
-    source/convert_from_argb.cc \
-    source/convert_to_argb.cc   \
-    source/convert_to_i420.cc   \
-    source/cpu_id.cc            \
-    source/planar_functions.cc  \
-    source/rotate.cc            \
-    source/rotate_any.cc        \
-    source/rotate_argb.cc       \
-    source/rotate_common.cc     \
-    source/rotate_gcc.cc        \
-    source/rotate_msa.cc        \
-    source/rotate_neon.cc       \
-    source/rotate_neon64.cc     \
-    source/rotate_win.cc        \
-    source/row_any.cc           \
-    source/row_common.cc        \
-    source/row_gcc.cc           \
-    source/row_msa.cc           \
-    source/row_neon.cc          \
-    source/row_neon64.cc        \
-    source/row_win.cc           \
-    source/scale.cc             \
-    source/scale_any.cc         \
-    source/scale_argb.cc        \
-    source/scale_common.cc      \
-    source/scale_gcc.cc         \
-    source/scale_msa.cc         \
-    source/scale_neon.cc        \
-    source/scale_neon64.cc      \
-    source/scale_rgb.cc         \
-    source/scale_uv.cc          \
-    source/scale_win.cc         \
-    source/video_common.cc
+    source/compare.c           \
+    source/compare_common.c    \
+    source/compare_gcc.c       \
+    source/compare_msa.c       \
+    source/compare_neon.c      \
+    source/compare_neon64.c    \
+    source/compare_win.c       \
+    source/convert.c           \
+    source/convert_argb.c      \
+    source/convert_from.c      \
+    source/convert_from_argb.c \
+    source/convert_to_argb.c   \
+    source/convert_to_i420.c   \
+    source/cpu_id.c            \
+    source/planar_functions.c  \
+    source/rotate.c            \
+    source/rotate_any.c        \
+    source/rotate_argb.c       \
+    source/rotate_common.c     \
+    source/rotate_gcc.c        \
+    source/rotate_msa.c        \
+    source/rotate_neon.c       \
+    source/rotate_neon64.c     \
+    source/rotate_win.c        \
+    source/row_any.c           \
+    source/row_common.c        \
+    source/row_gcc.c           \
+    source/row_msa.c           \
+    source/row_neon.c          \
+    source/row_neon64.c        \
+    source/row_win.c           \
+    source/scale.c             \
+    source/scale_any.c         \
+    source/scale_argb.c        \
+    source/scale_common.c      \
+    source/scale_gcc.c         \
+    source/scale_msa.c         \
+    source/scale_neon.c        \
+    source/scale_neon64.c      \
+    source/scale_rgb.c         \
+    source/scale_uv.c          \
+    source/scale_win.c         \
+    source/video_common.c
 
-common_CFLAGS := -Wall -fexceptions
-ifneq ($(LIBYUV_DISABLE_JPEG), "yes")
-LOCAL_SRC_FILES += \
-    source/convert_jpeg.cc      \
-    source/mjpeg_decoder.cc     \
-    source/mjpeg_validate.cc
-common_CFLAGS += -DHAVE_JPEG
-LOCAL_SHARED_LIBRARIES := libjpeg
-endif
+common_CFLAGS := -Wall -fexceptions -std=gnu99
 
 LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
@@ -74,37 +64,5 @@ include $(CLEAR_VARS)
 
 LOCAL_WHOLE_STATIC_LIBRARIES := libyuv_static
 LOCAL_MODULE := libyuv
-ifneq ($(LIBYUV_DISABLE_JPEG), "yes")
-LOCAL_SHARED_LIBRARIES := libjpeg
-endif
 
 include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_STATIC_LIBRARIES := libyuv_static
-LOCAL_SHARED_LIBRARIES := libjpeg
-LOCAL_MODULE_TAGS := tests
-LOCAL_CPP_EXTENSION := .cc
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
-LOCAL_SRC_FILES := \
-    unit_test/basictypes_test.cc    \
-    unit_test/color_test.cc         \
-    unit_test/compare_test.cc       \
-    unit_test/convert_argb_test.cc  \
-    unit_test/convert_test.cc       \
-    unit_test/cpu_test.cc           \
-    unit_test/cpu_thread_test.cc    \
-    unit_test/math_test.cc          \
-    unit_test/planar_test.cc        \
-    unit_test/rotate_argb_test.cc   \
-    unit_test/rotate_test.cc        \
-    unit_test/scale_argb_test.cc    \
-    unit_test/scale_plane_test.cc   \
-    unit_test/scale_rgb_test.cc     \
-    unit_test/scale_test.cc         \
-    unit_test/scale_uv_test.cc      \
-    unit_test/unit_test.cc          \
-    unit_test/video_common_test.cc
-
-LOCAL_MODULE := libyuv_unittest
-include $(BUILD_NATIVE_TEST)

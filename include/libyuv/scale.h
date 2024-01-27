@@ -14,7 +14,6 @@
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -288,34 +287,7 @@ int NV12Scale(const uint8_t* src_y,
               enum FilterMode filtering);
 
 #ifdef __cplusplus
-// Legacy API.  Deprecated.
-LIBYUV_API
-int Scale(const uint8_t* src_y,
-          const uint8_t* src_u,
-          const uint8_t* src_v,
-          int src_stride_y,
-          int src_stride_u,
-          int src_stride_v,
-          int src_width,
-          int src_height,
-          uint8_t* dst_y,
-          uint8_t* dst_u,
-          uint8_t* dst_v,
-          int dst_stride_y,
-          int dst_stride_u,
-          int dst_stride_v,
-          int dst_width,
-          int dst_height,
-          LIBYUV_BOOL interpolate);
-
-// For testing, allow disabling of specialized scalers.
-LIBYUV_API
-void SetUseReferenceImpl(LIBYUV_BOOL use);
-#endif  // __cplusplus
-
-#ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_SCALE_H_

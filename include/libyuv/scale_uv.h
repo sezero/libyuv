@@ -15,7 +15,6 @@
 #include "libyuv/scale.h"  // For FilterMode
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -45,7 +44,6 @@ int UVScale_16(const uint16_t* src_uv,
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_SCALE_UV_H_

@@ -16,7 +16,6 @@
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -216,7 +215,6 @@ LIBYUV_API uint32_t CanonicalFourCC(uint32_t fourcc);
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_VIDEO_COMMON_H_

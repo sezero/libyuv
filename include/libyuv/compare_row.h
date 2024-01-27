@@ -14,7 +14,6 @@
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -127,7 +126,6 @@ uint32_t HashDjb2_AVX2(const uint8_t* src, int count, uint32_t seed);
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_COMPARE_ROW_H_

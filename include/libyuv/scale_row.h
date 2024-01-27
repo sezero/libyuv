@@ -15,7 +15,6 @@
 #include "libyuv/scale.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -1888,7 +1887,6 @@ void ScaleRowUp2_Bilinear_RVV(const uint8_t* src_ptr,
                               int dst_width);
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_SCALE_ROW_H_
