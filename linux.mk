@@ -1,7 +1,7 @@
 # This is a generic makefile for libyuv for gcc.
 
 CC?=gcc
-CFLAGS?=-O2 -fomit-frame-pointer -std=gnu99
+CFLAGS?=-O2 -fomit-frame-pointer -std=gnu99 -Wall
 CFLAGS+=-Iinclude/
 
 LOCAL_OBJ_FILES := \

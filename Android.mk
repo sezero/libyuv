@@ -48,7 +48,7 @@ LOCAL_SRC_FILES := \
     source/scale_win.c         \
     source/video_common.c
 
-common_CFLAGS := -Wall -fexceptions -std=gnu99
+common_CFLAGS := -Wall -std=gnu99
 
 LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
