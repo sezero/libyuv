@@ -27,6 +27,20 @@ if(NOT MSVC AND (CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall)
 endif()
 
+if(NOT WIN32 AND (CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang"))
+  cmake_push_check_state()
+  set(CMAKE_REQUIRED_FLAGS "-fvisibility=hidden -Werror")
+  check_c_source_compiles("
+     #if !defined(__GNUC__)||(__GNUC__ < 4)
+     #error not gcc4 or newer.
+     #endif
+     int main(void) { return 0; }" HAVE_GCC_FVISIBILITY)
+  if(HAVE_GCC_FVISIBILITY)
+     add_compile_options("-fvisibility=hidden")
+  endif()
+  cmake_pop_check_state()
+endif()
+
 if(NOT APPLE AND NOT MSVC AND NOT CMAKE_SYSTEM_NAME MATCHES "kOpenBSD.*|OpenBSD.*")
   cmake_push_check_state()
   list(APPEND CMAKE_REQUIRED_LINK_OPTIONS "-Wl,--no-undefined")

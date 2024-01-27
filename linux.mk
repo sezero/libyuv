@@ -1,7 +1,7 @@
 # This is a generic makefile for libyuv for gcc.
 
 CC?=gcc
-CFLAGS?=-O2 -fomit-frame-pointer -std=gnu99 -Wall
+CFLAGS?=-O2 -fomit-frame-pointer -std=gnu99 -Wall -fvisibility=hidden
 CFLAGS+=-Iinclude/
 
 LOCAL_OBJ_FILES := \
@@ -64,4 +64,4 @@ libyuv.a: $(LOCAL_OBJ_FILES)
 	$(AR) $(ARFLAGS) $@ $(LOCAL_OBJ_FILES)
 
 clean:
-	/bin/rm -f source/*.o *.ii *.s libyuv.a
+	$(RM) source/*.o *.ii *.s libyuv.a
