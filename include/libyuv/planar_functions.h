@@ -24,7 +24,7 @@ extern "C" {
 // TODO(fbarchard): Move cpu macros to row.h
 #if defined(__pnacl__) || defined(__CLR_VER) ||            \
     (defined(__native_client__) && defined(__x86_64__)) || \
-    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__) && !defined(__clang__) && !defined(GCC_X86_TARGET_ATTRIBS))
+    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__) && !defined(GCC_X86_TARGET_ATTRIBS))
 #define LIBYUV_DISABLE_X86
 #endif
 // MemorySanitizer does not support assembly code yet. http://crbug.com/344505
