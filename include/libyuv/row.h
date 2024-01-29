@@ -22,7 +22,7 @@ extern "C" {
 
 #if defined(__pnacl__) || defined(__CLR_VER) ||            \
     (defined(__native_client__) && defined(__x86_64__)) || \
-    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__))
+    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__) && !defined(GCC_X86_TARGET_ATTRIBS))
 #define LIBYUV_DISABLE_X86
 #endif
 #if defined(__native_client__)
@@ -1380,29 +1380,53 @@ void NV21ToRGB24Row_RVV(const uint8_t* src_y,
                         const struct YuvConstants* yuvconstants,
                         int width);
 
+LIBYUV_TARGETING("avx2")
 void ARGBToYRow_AVX2(const uint8_t* src_argb, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToYRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToYRow_AVX2(const uint8_t* src_abgr, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToYRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToYRow_SSSE3(const uint8_t* src_argb, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToYJRow_SSSE3(const uint8_t* src_argb, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToYJRow_AVX2(const uint8_t* src_argb, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToYJRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToYRow_SSSE3(const uint8_t* src_abgr, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToYJRow_SSSE3(const uint8_t* src_abgr, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToYJRow_AVX2(const uint8_t* src_abgr, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToYJRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void RGBAToYJRow_AVX2(const uint8_t* src_rgba, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void RGBAToYJRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void RGBAToYJRow_SSSE3(const uint8_t* src_rgba, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void BGRAToYRow_SSSE3(const uint8_t* src_bgra, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToYRow_SSSE3(const uint8_t* src_abgr, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void RGBAToYRow_SSSE3(const uint8_t* src_rgba, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void RGB24ToYRow_SSSE3(const uint8_t* src_rgb24, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void RGB24ToYJRow_SSSE3(const uint8_t* src_rgb24, uint8_t* dst_yj, int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToYRow_SSSE3(const uint8_t* src_raw, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToYJRow_SSSE3(const uint8_t* src_raw, uint8_t* dst_yj, int width);
+LIBYUV_TARGETING("avx2")
 void RGB24ToYJRow_AVX2(const uint8_t* src_rgb24, uint8_t* dst_yj, int width);
+LIBYUV_TARGETING("avx2")
 void RAWToYJRow_AVX2(const uint8_t* src_raw, uint8_t* dst_yj, int width);
 void ARGBToYRow_NEON(const uint8_t* src_argb, uint8_t* dst_y, int width);
 void ARGBToYJRow_NEON(const uint8_t* src_argb, uint8_t* dst_yj, int width);
@@ -1692,20 +1716,33 @@ void RAWToYJRow_C(const uint8_t* src_rgb, uint8_t* dst_y, int width);
 void RGB565ToYRow_C(const uint8_t* src_rgb565, uint8_t* dst_y, int width);
 void ARGB1555ToYRow_C(const uint8_t* src_argb1555, uint8_t* dst_y, int width);
 void ARGB4444ToYRow_C(const uint8_t* src_argb4444, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToYRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToYJRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToYJRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void RGBAToYJRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void BGRAToYRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToYRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void RGBAToYRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void RGB24ToYRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void RGB24ToYJRow_Any_SSSE3(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToYRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToYJRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void RGB24ToYJRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void RAWToYJRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void ARGBToYRow_Any_NEON(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void ARGBToYJRow_Any_NEON(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
@@ -1769,101 +1806,121 @@ void ARGB1555ToYRow_Any_LASX(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              int width);
 
+LIBYUV_TARGETING("avx2")
 void ARGBToUVRow_AVX2(const uint8_t* src_argb,
                       int src_stride_argb,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToUVRow_AVX2(const uint8_t* src_abgr,
                       int src_stride_abgr,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToUVJRow_AVX2(const uint8_t* src_argb,
                        int src_stride_argb,
                        uint8_t* dst_u,
                        uint8_t* dst_v,
                        int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToUVJRow_AVX2(const uint8_t* src_abgr,
                        int src_stride_abgr,
                        uint8_t* dst_u,
                        uint8_t* dst_v,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToUVRow_SSSE3(const uint8_t* src_argb,
                        int src_stride_argb,
                        uint8_t* dst_u,
                        uint8_t* dst_v,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToUVJRow_SSSE3(const uint8_t* src_argb,
                         int src_stride_argb,
                         uint8_t* dst_u,
                         uint8_t* dst_v,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToUVJRow_SSSE3(const uint8_t* src_abgr,
                         int src_stride_abgr,
                         uint8_t* dst_u,
                         uint8_t* dst_v,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void BGRAToUVRow_SSSE3(const uint8_t* src_bgra,
                        int src_stride_bgra,
                        uint8_t* dst_u,
                        uint8_t* dst_v,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToUVRow_SSSE3(const uint8_t* src_abgr,
                        int src_stride_abgr,
                        uint8_t* dst_u,
                        uint8_t* dst_v,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void RGBAToUVRow_SSSE3(const uint8_t* src_rgba,
                        int src_stride_rgba,
                        uint8_t* dst_u,
                        uint8_t* dst_v,
                        int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToUVRow_Any_AVX2(const uint8_t* src_ptr,
                           int src_stride,
                           uint8_t* dst_u,
                           uint8_t* dst_v,
                           int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToUVRow_Any_AVX2(const uint8_t* src_ptr,
                           int src_stride,
                           uint8_t* dst_u,
                           uint8_t* dst_v,
                           int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToUVJRow_Any_AVX2(const uint8_t* src_ptr,
                            int src_stride,
                            uint8_t* dst_u,
                            uint8_t* dst_v,
                            int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToUVJRow_Any_AVX2(const uint8_t* src_ptr,
                            int src_stride,
                            uint8_t* dst_u,
                            uint8_t* dst_v,
                            int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToUVRow_Any_SSSE3(const uint8_t* src_ptr,
                            int src_stride,
                            uint8_t* dst_u,
                            uint8_t* dst_v,
                            int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToUVJRow_Any_SSSE3(const uint8_t* src_ptr,
                             int src_stride,
                             uint8_t* dst_u,
                             uint8_t* dst_v,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToUVJRow_Any_SSSE3(const uint8_t* src_ptr,
                             int src_stride,
                             uint8_t* dst_u,
                             uint8_t* dst_v,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void BGRAToUVRow_Any_SSSE3(const uint8_t* src_ptr,
                            int src_stride,
                            uint8_t* dst_u,
                            uint8_t* dst_v,
                            int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToUVRow_Any_SSSE3(const uint8_t* src_ptr,
                            int src_stride,
                            uint8_t* dst_u,
                            uint8_t* dst_v,
                            int width);
+LIBYUV_TARGETING("ssse3")
 void RGBAToUVRow_Any_SSSE3(const uint8_t* src_ptr,
                            int src_stride,
                            uint8_t* dst_u,
@@ -2146,10 +2203,12 @@ void ARGB4444ToUVRow_C(const uint8_t* src_argb4444,
                        uint8_t* dst_v,
                        int width);
 
+LIBYUV_TARGETING("ssse3")
 void ARGBToUV444Row_SSSE3(const uint8_t* src_argb,
                           uint8_t* dst_u,
                           uint8_t* dst_v,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToUV444Row_Any_SSSE3(const uint8_t* src_ptr,
                               uint8_t* dst_u,
                               uint8_t* dst_v,
@@ -2160,34 +2219,44 @@ void ARGBToUV444Row_C(const uint8_t* src_argb,
                       uint8_t* dst_v,
                       int width);
 
+LIBYUV_TARGETING("avx2")
 void MirrorRow_AVX2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("ssse3")
 void MirrorRow_SSSE3(const uint8_t* src, uint8_t* dst, int width);
 void MirrorRow_NEON(const uint8_t* src, uint8_t* dst, int width);
 void MirrorRow_MSA(const uint8_t* src, uint8_t* dst, int width);
 void MirrorRow_LSX(const uint8_t* src, uint8_t* dst, int width);
 void MirrorRow_LASX(const uint8_t* src, uint8_t* dst, int width);
 void MirrorRow_C(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx2")
 void MirrorRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void MirrorRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("sse2")
 void MirrorRow_Any_SSE2(const uint8_t* src, uint8_t* dst, int width);
 void MirrorRow_Any_NEON(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void MirrorRow_Any_MSA(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void MirrorRow_Any_LSX(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void MirrorRow_Any_LASX(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void MirrorUVRow_AVX2(const uint8_t* src_uv, uint8_t* dst_uv, int width);
+LIBYUV_TARGETING("ssse3")
 void MirrorUVRow_SSSE3(const uint8_t* src_uv, uint8_t* dst_uv, int width);
 void MirrorUVRow_NEON(const uint8_t* src_uv, uint8_t* dst_uv, int width);
 void MirrorUVRow_MSA(const uint8_t* src_uv, uint8_t* dst_uv, int width);
 void MirrorUVRow_LSX(const uint8_t* src_uv, uint8_t* dst_uv, int width);
 void MirrorUVRow_LASX(const uint8_t* src_uv, uint8_t* dst_uv, int width);
 void MirrorUVRow_C(const uint8_t* src_uv, uint8_t* dst_uv, int width);
+LIBYUV_TARGETING("avx2")
 void MirrorUVRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void MirrorUVRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void MirrorUVRow_Any_NEON(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void MirrorUVRow_Any_MSA(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void MirrorUVRow_Any_LSX(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void MirrorUVRow_Any_LASX(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 
+LIBYUV_TARGETING("ssse3")
 void MirrorSplitUVRow_SSSE3(const uint8_t* src,
                             uint8_t* dst_u,
                             uint8_t* dst_v,
@@ -2211,16 +2280,20 @@ void MirrorSplitUVRow_C(const uint8_t* src_uv,
 
 void MirrorRow_16_C(const uint16_t* src, uint16_t* dst, int width);
 
+LIBYUV_TARGETING("avx2")
 void ARGBMirrorRow_AVX2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBMirrorRow_SSE2(const uint8_t* src, uint8_t* dst, int width);
 void ARGBMirrorRow_NEON(const uint8_t* src_argb, uint8_t* dst_argb, int width);
 void ARGBMirrorRow_MSA(const uint8_t* src, uint8_t* dst, int width);
 void ARGBMirrorRow_LSX(const uint8_t* src, uint8_t* dst, int width);
 void ARGBMirrorRow_LASX(const uint8_t* src, uint8_t* dst, int width);
 void ARGBMirrorRow_C(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBMirrorRow_Any_AVX2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("sse2")
 void ARGBMirrorRow_Any_SSE2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
@@ -2233,6 +2306,7 @@ void ARGBMirrorRow_Any_LASX(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
 
+LIBYUV_TARGETING("ssse3")
 void RGB24MirrorRow_SSSE3(const uint8_t* src_rgb24,
                           uint8_t* dst_rgb24,
                           int width);
@@ -2240,6 +2314,7 @@ void RGB24MirrorRow_NEON(const uint8_t* src_rgb24,
                          uint8_t* dst_rgb24,
                          int width);
 void RGB24MirrorRow_C(const uint8_t* src_rgb24, uint8_t* dst_rgb24, int width);
+LIBYUV_TARGETING("ssse3")
 void RGB24MirrorRow_Any_SSSE3(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int width);
@@ -2251,10 +2326,12 @@ void SplitUVRow_C(const uint8_t* src_uv,
                   uint8_t* dst_u,
                   uint8_t* dst_v,
                   int width);
+LIBYUV_TARGETING("sse2")
 void SplitUVRow_SSE2(const uint8_t* src_uv,
                      uint8_t* dst_u,
                      uint8_t* dst_v,
                      int width);
+LIBYUV_TARGETING("avx2")
 void SplitUVRow_AVX2(const uint8_t* src_uv,
                      uint8_t* dst_u,
                      uint8_t* dst_v,
@@ -2275,10 +2352,12 @@ void SplitUVRow_RVV(const uint8_t* src_uv,
                     uint8_t* dst_u,
                     uint8_t* dst_v,
                     int width);
+LIBYUV_TARGETING("sse2")
 void SplitUVRow_Any_SSE2(const uint8_t* src_ptr,
                          uint8_t* dst_u,
                          uint8_t* dst_v,
                          int width);
+LIBYUV_TARGETING("avx2")
 void SplitUVRow_Any_AVX2(const uint8_t* src_ptr,
                          uint8_t* dst_u,
                          uint8_t* dst_v,
@@ -2307,18 +2386,22 @@ void DetileRow_Any_NEON(const uint8_t* src,
                         ptrdiff_t src_tile_stride,
                         uint8_t* dst,
                         int width);
+LIBYUV_TARGETING("sse2")
 void DetileRow_SSE2(const uint8_t* src,
                     ptrdiff_t src_tile_stride,
                     uint8_t* dst,
                     int width);
+LIBYUV_TARGETING("sse2")
 void DetileRow_Any_SSE2(const uint8_t* src,
                         ptrdiff_t src_tile_stride,
                         uint8_t* dst,
                         int width);
+LIBYUV_TARGETING("avx")
 void DetileRow_AVX(const uint8_t* src,
                    ptrdiff_t src_tile_stride,
                    uint8_t* dst,
                    int width);
+LIBYUV_TARGETING("avx")
 void DetileRow_Any_AVX(const uint8_t* src,
                        ptrdiff_t src_tile_stride,
                        uint8_t* dst,
@@ -2335,18 +2418,22 @@ void DetileRow_16_Any_NEON(const uint16_t* src,
                            ptrdiff_t src_tile_stride,
                            uint16_t* dst,
                            int width);
+LIBYUV_TARGETING("sse2")
 void DetileRow_16_SSE2(const uint16_t* src,
                        ptrdiff_t src_tile_stride,
                        uint16_t* dst,
                        int width);
+LIBYUV_TARGETING("sse2")
 void DetileRow_16_Any_SSE2(const uint16_t* src,
                            ptrdiff_t src_tile_stride,
                            uint16_t* dst,
                            int width);
+LIBYUV_TARGETING("avx")
 void DetileRow_16_AVX(const uint16_t* src,
                       ptrdiff_t src_tile_stride,
                       uint16_t* dst,
                       int width);
+LIBYUV_TARGETING("avx")
 void DetileRow_16_Any_AVX(const uint16_t* src,
                           ptrdiff_t src_tile_stride,
                           uint16_t* dst,
@@ -2356,11 +2443,13 @@ void DetileSplitUVRow_C(const uint8_t* src_uv,
                         uint8_t* dst_u,
                         uint8_t* dst_v,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void DetileSplitUVRow_SSSE3(const uint8_t* src_uv,
                             ptrdiff_t src_tile_stride,
                             uint8_t* dst_u,
                             uint8_t* dst_v,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void DetileSplitUVRow_Any_SSSE3(const uint8_t* src_uv,
                                 ptrdiff_t src_tile_stride,
                                 uint8_t* dst_u,
@@ -2382,12 +2471,14 @@ void DetileToYUY2_C(const uint8_t* src_y,
                     ptrdiff_t src_uv_tile_stride,
                     uint8_t* dst_yuy2,
                     int width);
+LIBYUV_TARGETING("sse2")
 void DetileToYUY2_SSE2(const uint8_t* src_y,
                        ptrdiff_t src_y_tile_stride,
                        const uint8_t* src_uv,
                        ptrdiff_t src_uv_tile_stride,
                        uint8_t* dst_yuy2,
                        int width);
+LIBYUV_TARGETING("sse2")
 void DetileToYUY2_Any_SSE2(const uint8_t* src_y,
                            ptrdiff_t src_y_tile_stride,
                            const uint8_t* src_uv,
@@ -2412,10 +2503,12 @@ void MergeUVRow_C(const uint8_t* src_u,
                   const uint8_t* src_v,
                   uint8_t* dst_uv,
                   int width);
+LIBYUV_TARGETING("sse2")
 void MergeUVRow_SSE2(const uint8_t* src_u,
                      const uint8_t* src_v,
                      uint8_t* dst_uv,
                      int width);
+LIBYUV_TARGETING("avx2")
 void MergeUVRow_AVX2(const uint8_t* src_u,
                      const uint8_t* src_v,
                      uint8_t* dst_uv,
@@ -2440,10 +2533,12 @@ void MergeUVRow_RVV(const uint8_t* src_u,
                     const uint8_t* src_v,
                     uint8_t* dst_uv,
                     int width);
+LIBYUV_TARGETING("sse2")
 void MergeUVRow_Any_SSE2(const uint8_t* y_buf,
                          const uint8_t* uv_buf,
                          uint8_t* dst_ptr,
                          int width);
+LIBYUV_TARGETING("avx2")
 void MergeUVRow_Any_AVX2(const uint8_t* y_buf,
                          const uint8_t* uv_buf,
                          uint8_t* dst_ptr,
@@ -2479,6 +2574,7 @@ void HalfMergeUVRow_NEON(const uint8_t* src_u,
                          uint8_t* dst_uv,
                          int width);
 
+LIBYUV_TARGETING("ssse3")
 void HalfMergeUVRow_SSSE3(const uint8_t* src_u,
                           int src_stride_u,
                           const uint8_t* src_v,
@@ -2486,6 +2582,7 @@ void HalfMergeUVRow_SSSE3(const uint8_t* src_u,
                           uint8_t* dst_uv,
                           int width);
 
+LIBYUV_TARGETING("avx2")
 void HalfMergeUVRow_AVX2(const uint8_t* src_u,
                          int src_stride_u,
                          const uint8_t* src_v,
@@ -2498,6 +2595,7 @@ void SplitRGBRow_C(const uint8_t* src_rgb,
                    uint8_t* dst_g,
                    uint8_t* dst_b,
                    int width);
+LIBYUV_TARGETING("ssse3")
 void SplitRGBRow_SSSE3(const uint8_t* src_rgb,
                        uint8_t* dst_r,
                        uint8_t* dst_g,
@@ -2513,6 +2611,7 @@ void SplitRGBRow_RVV(const uint8_t* src_rgb,
                      uint8_t* dst_g,
                      uint8_t* dst_b,
                      int width);
+LIBYUV_TARGETING("ssse3")
 void SplitRGBRow_Any_SSSE3(const uint8_t* src_ptr,
                            uint8_t* dst_r,
                            uint8_t* dst_g,
@@ -2529,6 +2628,7 @@ void MergeRGBRow_C(const uint8_t* src_r,
                    const uint8_t* src_b,
                    uint8_t* dst_rgb,
                    int width);
+LIBYUV_TARGETING("ssse3")
 void MergeRGBRow_SSSE3(const uint8_t* src_r,
                        const uint8_t* src_g,
                        const uint8_t* src_b,
@@ -2544,6 +2644,7 @@ void MergeRGBRow_RVV(const uint8_t* src_r,
                      const uint8_t* src_b,
                      uint8_t* dst_rgb,
                      int width);
+LIBYUV_TARGETING("ssse3")
 void MergeRGBRow_Any_SSSE3(const uint8_t* y_buf,
                            const uint8_t* u_buf,
                            const uint8_t* v_buf,
@@ -2560,12 +2661,14 @@ void MergeARGBRow_C(const uint8_t* src_r,
                     const uint8_t* src_a,
                     uint8_t* dst_argb,
                     int width);
+LIBYUV_TARGETING("sse2")
 void MergeARGBRow_SSE2(const uint8_t* src_r,
                        const uint8_t* src_g,
                        const uint8_t* src_b,
                        const uint8_t* src_a,
                        uint8_t* dst_argb,
                        int width);
+LIBYUV_TARGETING("avx2")
 void MergeARGBRow_AVX2(const uint8_t* src_r,
                        const uint8_t* src_g,
                        const uint8_t* src_b,
@@ -2584,12 +2687,14 @@ void MergeARGBRow_RVV(const uint8_t* src_r,
                       const uint8_t* src_a,
                       uint8_t* dst_argb,
                       int width);
+LIBYUV_TARGETING("sse2")
 void MergeARGBRow_Any_SSE2(const uint8_t* y_buf,
                            const uint8_t* u_buf,
                            const uint8_t* v_buf,
                            const uint8_t* a_buf,
                            uint8_t* dst_ptr,
                            int width);
+LIBYUV_TARGETING("avx2")
 void MergeARGBRow_Any_AVX2(const uint8_t* y_buf,
                            const uint8_t* u_buf,
                            const uint8_t* v_buf,
@@ -2608,18 +2713,21 @@ void SplitARGBRow_C(const uint8_t* src_argb,
                     uint8_t* dst_b,
                     uint8_t* dst_a,
                     int width);
+LIBYUV_TARGETING("sse2")
 void SplitARGBRow_SSE2(const uint8_t* src_argb,
                        uint8_t* dst_r,
                        uint8_t* dst_g,
                        uint8_t* dst_b,
                        uint8_t* dst_a,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void SplitARGBRow_SSSE3(const uint8_t* src_argb,
                         uint8_t* dst_r,
                         uint8_t* dst_g,
                         uint8_t* dst_b,
                         uint8_t* dst_a,
                         int width);
+LIBYUV_TARGETING("avx2")
 void SplitARGBRow_AVX2(const uint8_t* src_argb,
                        uint8_t* dst_r,
                        uint8_t* dst_g,
@@ -2638,18 +2746,21 @@ void SplitARGBRow_RVV(const uint8_t* src_rgba,
                       uint8_t* dst_b,
                       uint8_t* dst_a,
                       int width);
+LIBYUV_TARGETING("sse2")
 void SplitARGBRow_Any_SSE2(const uint8_t* src_ptr,
                            uint8_t* dst_r,
                            uint8_t* dst_g,
                            uint8_t* dst_b,
                            uint8_t* dst_a,
                            int width);
+LIBYUV_TARGETING("ssse3")
 void SplitARGBRow_Any_SSSE3(const uint8_t* src_ptr,
                             uint8_t* dst_r,
                             uint8_t* dst_g,
                             uint8_t* dst_b,
                             uint8_t* dst_a,
                             int width);
+LIBYUV_TARGETING("avx2")
 void SplitARGBRow_Any_AVX2(const uint8_t* src_ptr,
                            uint8_t* dst_r,
                            uint8_t* dst_g,
@@ -2667,11 +2778,13 @@ void MergeXRGBRow_C(const uint8_t* src_r,
                     const uint8_t* src_b,
                     uint8_t* dst_argb,
                     int width);
+LIBYUV_TARGETING("sse2")
 void MergeXRGBRow_SSE2(const uint8_t* src_r,
                        const uint8_t* src_g,
                        const uint8_t* src_b,
                        uint8_t* dst_argb,
                        int width);
+LIBYUV_TARGETING("avx2")
 void MergeXRGBRow_AVX2(const uint8_t* src_r,
                        const uint8_t* src_g,
                        const uint8_t* src_b,
@@ -2687,11 +2800,13 @@ void MergeXRGBRow_RVV(const uint8_t* src_r,
                       const uint8_t* src_b,
                       uint8_t* dst_argb,
                       int width);
+LIBYUV_TARGETING("sse2")
 void MergeXRGBRow_Any_SSE2(const uint8_t* y_buf,
                            const uint8_t* u_buf,
                            const uint8_t* v_buf,
                            uint8_t* dst_ptr,
                            int width);
+LIBYUV_TARGETING("avx2")
 void MergeXRGBRow_Any_AVX2(const uint8_t* y_buf,
                            const uint8_t* u_buf,
                            const uint8_t* v_buf,
@@ -2707,16 +2822,19 @@ void SplitXRGBRow_C(const uint8_t* src_argb,
                     uint8_t* dst_g,
                     uint8_t* dst_b,
                     int width);
+LIBYUV_TARGETING("sse2")
 void SplitXRGBRow_SSE2(const uint8_t* src_argb,
                        uint8_t* dst_r,
                        uint8_t* dst_g,
                        uint8_t* dst_b,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void SplitXRGBRow_SSSE3(const uint8_t* src_argb,
                         uint8_t* dst_r,
                         uint8_t* dst_g,
                         uint8_t* dst_b,
                         int width);
+LIBYUV_TARGETING("avx2")
 void SplitXRGBRow_AVX2(const uint8_t* src_argb,
                        uint8_t* dst_r,
                        uint8_t* dst_g,
@@ -2732,16 +2850,19 @@ void SplitXRGBRow_RVV(const uint8_t* src_rgba,
                       uint8_t* dst_g,
                       uint8_t* dst_b,
                       int width);
+LIBYUV_TARGETING("sse2")
 void SplitXRGBRow_Any_SSE2(const uint8_t* src_ptr,
                            uint8_t* dst_r,
                            uint8_t* dst_g,
                            uint8_t* dst_b,
                            int width);
+LIBYUV_TARGETING("ssse3")
 void SplitXRGBRow_Any_SSSE3(const uint8_t* src_ptr,
                             uint8_t* dst_r,
                             uint8_t* dst_g,
                             uint8_t* dst_b,
                             int width);
+LIBYUV_TARGETING("avx2")
 void SplitXRGBRow_Any_AVX2(const uint8_t* src_ptr,
                            uint8_t* dst_r,
                            uint8_t* dst_g,
@@ -2785,12 +2906,14 @@ void MergeXRGB16To8Row_C(const uint16_t* src_r,
                          uint8_t* dst_argb,
                          int depth,
                          int width);
+LIBYUV_TARGETING("avx2")
 void MergeXR30Row_AVX2(const uint16_t* src_r,
                        const uint16_t* src_g,
                        const uint16_t* src_b,
                        uint8_t* dst_ar30,
                        int depth,
                        int width);
+LIBYUV_TARGETING("avx2")
 void MergeAR64Row_AVX2(const uint16_t* src_r,
                        const uint16_t* src_g,
                        const uint16_t* src_b,
@@ -2798,6 +2921,7 @@ void MergeAR64Row_AVX2(const uint16_t* src_r,
                        uint16_t* dst_ar64,
                        int depth,
                        int width);
+LIBYUV_TARGETING("avx2")
 void MergeARGB16To8Row_AVX2(const uint16_t* src_r,
                             const uint16_t* src_g,
                             const uint16_t* src_b,
@@ -2805,12 +2929,14 @@ void MergeARGB16To8Row_AVX2(const uint16_t* src_r,
                             uint8_t* dst_argb,
                             int depth,
                             int width);
+LIBYUV_TARGETING("avx2")
 void MergeXR64Row_AVX2(const uint16_t* src_r,
                        const uint16_t* src_g,
                        const uint16_t* src_b,
                        uint16_t* dst_ar64,
                        int depth,
                        int width);
+LIBYUV_TARGETING("avx2")
 void MergeXRGB16To8Row_AVX2(const uint16_t* src_r,
                             const uint16_t* src_g,
                             const uint16_t* src_b,
@@ -2855,12 +2981,14 @@ void MergeXRGB16To8Row_NEON(const uint16_t* src_r,
                             uint8_t* dst_argb,
                             int depth,
                             int width);
+LIBYUV_TARGETING("avx2")
 void MergeXR30Row_Any_AVX2(const uint16_t* r_buf,
                            const uint16_t* g_buf,
                            const uint16_t* b_buf,
                            uint8_t* dst_ptr,
                            int depth,
                            int width);
+LIBYUV_TARGETING("avx2")
 void MergeAR64Row_Any_AVX2(const uint16_t* r_buf,
                            const uint16_t* g_buf,
                            const uint16_t* b_buf,
@@ -2868,12 +2996,14 @@ void MergeAR64Row_Any_AVX2(const uint16_t* r_buf,
                            uint16_t* dst_ptr,
                            int depth,
                            int width);
+LIBYUV_TARGETING("avx2")
 void MergeXR64Row_Any_AVX2(const uint16_t* r_buf,
                            const uint16_t* g_buf,
                            const uint16_t* b_buf,
                            uint16_t* dst_ptr,
                            int depth,
                            int width);
+LIBYUV_TARGETING("avx2")
 void MergeARGB16To8Row_Any_AVX2(const uint16_t* r_buf,
                                 const uint16_t* g_buf,
                                 const uint16_t* b_buf,
@@ -2881,6 +3011,7 @@ void MergeARGB16To8Row_Any_AVX2(const uint16_t* r_buf,
                                 uint8_t* dst_ptr,
                                 int depth,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void MergeXRGB16To8Row_Any_AVX2(const uint16_t* r_buf,
                                 const uint16_t* g_buf,
                                 const uint16_t* b_buf,
@@ -2931,11 +3062,13 @@ void MergeUVRow_16_C(const uint16_t* src_u,
                      uint16_t* dst_uv,
                      int depth,
                      int width);
+LIBYUV_TARGETING("avx2")
 void MergeUVRow_16_AVX2(const uint16_t* src_u,
                         const uint16_t* src_v,
                         uint16_t* dst_uv,
                         int depth,
                         int width);
+LIBYUV_TARGETING("avx2")
 void MergeUVRow_16_Any_AVX2(const uint16_t* src_u,
                             const uint16_t* src_v,
                             uint16_t* dst_uv,
@@ -2957,11 +3090,13 @@ void SplitUVRow_16_C(const uint16_t* src_uv,
                      uint16_t* dst_v,
                      int depth,
                      int width);
+LIBYUV_TARGETING("avx2")
 void SplitUVRow_16_AVX2(const uint16_t* src_uv,
                         uint16_t* dst_u,
                         uint16_t* dst_v,
                         int depth,
                         int width);
+LIBYUV_TARGETING("avx2")
 void SplitUVRow_16_Any_AVX2(const uint16_t* src_uv,
                             uint16_t* dst_u,
                             uint16_t* dst_v,
@@ -2982,10 +3117,12 @@ void MultiplyRow_16_C(const uint16_t* src_y,
                       uint16_t* dst_y,
                       int scale,
                       int width);
+LIBYUV_TARGETING("avx2")
 void MultiplyRow_16_AVX2(const uint16_t* src_y,
                          uint16_t* dst_y,
                          int scale,
                          int width);
+LIBYUV_TARGETING("avx2")
 void MultiplyRow_16_Any_AVX2(const uint16_t* src_ptr,
                              uint16_t* dst_ptr,
                              int scale,
@@ -3003,10 +3140,12 @@ void DivideRow_16_C(const uint16_t* src_y,
                     uint16_t* dst_y,
                     int scale,
                     int width);
+LIBYUV_TARGETING("avx2")
 void DivideRow_16_AVX2(const uint16_t* src_y,
                        uint16_t* dst_y,
                        int scale,
                        int width);
+LIBYUV_TARGETING("avx2")
 void DivideRow_16_Any_AVX2(const uint16_t* src_ptr,
                            uint16_t* dst_ptr,
                            int scale,
@@ -3024,18 +3163,22 @@ void Convert8To16Row_C(const uint8_t* src_y,
                        uint16_t* dst_y,
                        int scale,
                        int width);
+LIBYUV_TARGETING("sse2")
 void Convert8To16Row_SSE2(const uint8_t* src_y,
                           uint16_t* dst_y,
                           int scale,
                           int width);
+LIBYUV_TARGETING("avx2")
 void Convert8To16Row_AVX2(const uint8_t* src_y,
                           uint16_t* dst_y,
                           int scale,
                           int width);
+LIBYUV_TARGETING("sse2")
 void Convert8To16Row_Any_SSE2(const uint8_t* src_ptr,
                               uint16_t* dst_ptr,
                               int scale,
                               int width);
+LIBYUV_TARGETING("avx2")
 void Convert8To16Row_Any_AVX2(const uint8_t* src_ptr,
                               uint16_t* dst_ptr,
                               int scale,
@@ -3045,18 +3188,22 @@ void Convert16To8Row_C(const uint16_t* src_y,
                        uint8_t* dst_y,
                        int scale,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void Convert16To8Row_SSSE3(const uint16_t* src_y,
                            uint8_t* dst_y,
                            int scale,
                            int width);
+LIBYUV_TARGETING("avx2")
 void Convert16To8Row_AVX2(const uint16_t* src_y,
                           uint8_t* dst_y,
                           int scale,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void Convert16To8Row_Any_SSSE3(const uint16_t* src_ptr,
                                uint8_t* dst_ptr,
                                int scale,
                                int width);
+LIBYUV_TARGETING("avx2")
 void Convert16To8Row_Any_AVX2(const uint16_t* src_ptr,
                               uint8_t* dst_ptr,
                               int scale,
@@ -3070,33 +3217,43 @@ void Convert16To8Row_Any_NEON(const uint16_t* src_ptr,
                               int scale,
                               int width);
 
+LIBYUV_TARGETING("sse2")
 void CopyRow_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx")
 void CopyRow_AVX(const uint8_t* src, uint8_t* dst, int width);
 void CopyRow_ERMS(const uint8_t* src, uint8_t* dst, int width);
 void CopyRow_NEON(const uint8_t* src, uint8_t* dst, int width);
 void CopyRow_MIPS(const uint8_t* src, uint8_t* dst, int count);
 void CopyRow_RVV(const uint8_t* src, uint8_t* dst, int count);
 void CopyRow_C(const uint8_t* src, uint8_t* dst, int count);
+LIBYUV_TARGETING("sse2")
 void CopyRow_Any_SSE2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx")
 void CopyRow_Any_AVX(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void CopyRow_Any_NEON(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 
 void CopyRow_16_C(const uint16_t* src, uint16_t* dst, int count);
 
 void ARGBCopyAlphaRow_C(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBCopyAlphaRow_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBCopyAlphaRow_AVX2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBCopyAlphaRow_Any_SSE2(const uint8_t* src_ptr,
                                uint8_t* dst_ptr,
                                int width);
+LIBYUV_TARGETING("avx2")
 void ARGBCopyAlphaRow_Any_AVX2(const uint8_t* src_ptr,
                                uint8_t* dst_ptr,
                                int width);
 
 void ARGBExtractAlphaRow_C(const uint8_t* src_argb, uint8_t* dst_a, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBExtractAlphaRow_SSE2(const uint8_t* src_argb,
                               uint8_t* dst_a,
                               int width);
+LIBYUV_TARGETING("avx2")
 void ARGBExtractAlphaRow_AVX2(const uint8_t* src_argb,
                               uint8_t* dst_a,
                               int width);
@@ -3112,9 +3269,11 @@ void ARGBExtractAlphaRow_LSX(const uint8_t* src_argb,
 void ARGBExtractAlphaRow_RVV(const uint8_t* src_argb,
                              uint8_t* dst_a,
                              int width);
+LIBYUV_TARGETING("sse2")
 void ARGBExtractAlphaRow_Any_SSE2(const uint8_t* src_ptr,
                                   uint8_t* dst_ptr,
                                   int width);
+LIBYUV_TARGETING("avx2")
 void ARGBExtractAlphaRow_Any_AVX2(const uint8_t* src_ptr,
                                   uint8_t* dst_ptr,
                                   int width);
@@ -3129,12 +3288,16 @@ void ARGBExtractAlphaRow_Any_LSX(const uint8_t* src_ptr,
                                  int width);
 
 void ARGBCopyYToAlphaRow_C(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBCopyYToAlphaRow_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBCopyYToAlphaRow_AVX2(const uint8_t* src, uint8_t* dst, int width);
 void ARGBCopyYToAlphaRow_RVV(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBCopyYToAlphaRow_Any_SSE2(const uint8_t* src_ptr,
                                   uint8_t* dst_ptr,
                                   int width);
+LIBYUV_TARGETING("avx2")
 void ARGBCopyYToAlphaRow_Any_AVX2(const uint8_t* src_ptr,
                                   uint8_t* dst_ptr,
                                   int width);
@@ -3163,10 +3326,12 @@ void ARGBShuffleRow_C(const uint8_t* src_argb,
                       uint8_t* dst_argb,
                       const uint8_t* shuffler,
                       int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBShuffleRow_SSSE3(const uint8_t* src_argb,
                           uint8_t* dst_argb,
                           const uint8_t* shuffler,
                           int width);
+LIBYUV_TARGETING("avx2")
 void ARGBShuffleRow_AVX2(const uint8_t* src_argb,
                          uint8_t* dst_argb,
                          const uint8_t* shuffler,
@@ -3187,10 +3352,12 @@ void ARGBShuffleRow_LASX(const uint8_t* src_argb,
                          uint8_t* dst_argb,
                          const uint8_t* shuffler,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBShuffleRow_Any_SSSE3(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               const uint8_t* param,
                               int width);
+LIBYUV_TARGETING("avx2")
 void ARGBShuffleRow_Any_AVX2(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              const uint8_t* param,
@@ -3212,21 +3379,31 @@ void ARGBShuffleRow_Any_LASX(const uint8_t* src_ptr,
                              const uint8_t* param,
                              int width);
 
+LIBYUV_TARGETING("ssse3")
 void RGB24ToARGBRow_SSSE3(const uint8_t* src_rgb24,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToARGBRow_SSSE3(const uint8_t* src_raw, uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToRGBARow_SSSE3(const uint8_t* src_raw, uint8_t* dst_rgba, int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToRGB24Row_SSSE3(const uint8_t* src_raw, uint8_t* dst_rgb24, int width);
+LIBYUV_TARGETING("sse2")
 void RGB565ToARGBRow_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGB1555ToARGBRow_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGB4444ToARGBRow_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx2")
 void RGB565ToARGBRow_AVX2(const uint8_t* src_rgb565,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("avx2")
 void ARGB1555ToARGBRow_AVX2(const uint8_t* src_argb1555,
                             uint8_t* dst_argb,
                             int width);
+LIBYUV_TARGETING("avx2")
 void ARGB4444ToARGBRow_AVX2(const uint8_t* src_argb4444,
                             uint8_t* dst_argb,
                             int width);
@@ -3303,34 +3480,44 @@ void AR30ToABGRRow_C(const uint8_t* src_ar30, uint8_t* dst_abgr, int width);
 void ARGBToAR30Row_C(const uint8_t* src_argb, uint8_t* dst_ar30, int width);
 void AR30ToAB30Row_C(const uint8_t* src_ar30, uint8_t* dst_ab30, int width);
 
+LIBYUV_TARGETING("ssse3")
 void RGB24ToARGBRow_Any_SSSE3(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToARGBRow_Any_SSSE3(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToRGBARow_Any_SSSE3(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void RAWToRGB24Row_Any_SSSE3(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              int width);
 
+LIBYUV_TARGETING("sse2")
 void RGB565ToARGBRow_Any_SSE2(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("sse2")
 void ARGB1555ToARGBRow_Any_SSE2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("sse2")
 void ARGB4444ToARGBRow_Any_SSE2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void RGB565ToARGBRow_Any_AVX2(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("avx2")
 void ARGB1555ToARGBRow_Any_AVX2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void ARGB4444ToARGBRow_Any_AVX2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
@@ -3395,15 +3582,24 @@ void ARGB4444ToARGBRow_Any_LASX(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
 
+LIBYUV_TARGETING("ssse3")
 void ARGBToRGB24Row_SSSE3(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToRAWRow_SSSE3(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToRGB565Row_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToARGB1555Row_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToARGB4444Row_SSE2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToAR30Row_SSSE3(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToAR30Row_SSSE3(const uint8_t* src, uint8_t* dst, int width);
 
+LIBYUV_TARGETING("avx2")
 void ARGBToRAWRow_AVX2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToRGB24Row_AVX2(const uint8_t* src, uint8_t* dst, int width);
 
 void ARGBToRGB24Row_AVX512VBMI(const uint8_t* src, uint8_t* dst, int width);
@@ -3412,23 +3608,30 @@ void ARGBToRGB565DitherRow_C(const uint8_t* src_argb,
                              uint8_t* dst_rgb,
                              uint32_t dither4,
                              int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToRGB565DitherRow_SSE2(const uint8_t* src,
                                 uint8_t* dst,
                                 uint32_t dither4,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToRGB565DitherRow_AVX2(const uint8_t* src,
                                 uint8_t* dst,
                                 uint32_t dither4,
                                 int width);
 
+LIBYUV_TARGETING("avx2")
 void ARGBToRGB565Row_AVX2(const uint8_t* src_argb, uint8_t* dst_rgb, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToARGB1555Row_AVX2(const uint8_t* src_argb,
                             uint8_t* dst_rgb,
                             int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToARGB4444Row_AVX2(const uint8_t* src_argb,
                             uint8_t* dst_rgb,
                             int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToAR30Row_AVX2(const uint8_t* src, uint8_t* dst, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToAR30Row_AVX2(const uint8_t* src, uint8_t* dst, int width);
 
 void ARGBToRGB24Row_NEON(const uint8_t* src_argb,
@@ -3516,21 +3719,29 @@ void AR64ShuffleRow_C(const uint8_t* src_ar64,
                       uint8_t* dst_ar64,
                       const uint8_t* shuffler,
                       int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToAR64Row_SSSE3(const uint8_t* src_argb,
                          uint16_t* dst_ar64,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToAB64Row_SSSE3(const uint8_t* src_argb,
                          uint16_t* dst_ab64,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void AR64ToARGBRow_SSSE3(const uint16_t* src_ar64,
                          uint8_t* dst_argb,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void AB64ToARGBRow_SSSE3(const uint16_t* src_ab64,
                          uint8_t* dst_argb,
                          int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToAR64Row_AVX2(const uint8_t* src_argb, uint16_t* dst_ar64, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToAB64Row_AVX2(const uint8_t* src_argb, uint16_t* dst_ab64, int width);
+LIBYUV_TARGETING("avx2")
 void AR64ToARGBRow_AVX2(const uint16_t* src_ar64, uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("avx2")
 void AB64ToARGBRow_AVX2(const uint16_t* src_ab64, uint8_t* dst_argb, int width);
 void ARGBToAR64Row_NEON(const uint8_t* src_argb, uint16_t* dst_ar64, int width);
 void ARGBToAB64Row_NEON(const uint8_t* src_argb, uint16_t* dst_ab64, int width);
@@ -3542,27 +3753,35 @@ void AR64ToARGBRow_RVV(const uint16_t* src_ar64, uint8_t* dst_argb, int width);
 void AB64ToARGBRow_RVV(const uint16_t* src_ab64, uint8_t* dst_argb, int width);
 void AR64ToAB64Row_RVV(const uint16_t* src_ar64, uint16_t* dst_ab64, int width);
 void RGBAToARGBRow_RVV(const uint8_t* src_rgba, uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToAR64Row_Any_SSSE3(const uint8_t* src_ptr,
                              uint16_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToAB64Row_Any_SSSE3(const uint8_t* src_ptr,
                              uint16_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void AR64ToARGBRow_Any_SSSE3(const uint16_t* src_ptr,
                              uint8_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void AB64ToARGBRow_Any_SSSE3(const uint16_t* src_ptr,
                              uint8_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToAR64Row_Any_AVX2(const uint8_t* src_ptr,
                             uint16_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToAB64Row_Any_AVX2(const uint8_t* src_ptr,
                             uint16_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("avx2")
 void AR64ToARGBRow_Any_AVX2(const uint16_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("avx2")
 void AB64ToARGBRow_Any_AVX2(const uint16_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
@@ -3579,16 +3798,20 @@ void AB64ToARGBRow_Any_NEON(const uint16_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
 
+LIBYUV_TARGETING("sse2")
 void J400ToARGBRow_SSE2(const uint8_t* src_y, uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("avx2")
 void J400ToARGBRow_AVX2(const uint8_t* src_y, uint8_t* dst_argb, int width);
 void J400ToARGBRow_NEON(const uint8_t* src_y, uint8_t* dst_argb, int width);
 void J400ToARGBRow_MSA(const uint8_t* src_y, uint8_t* dst_argb, int width);
 void J400ToARGBRow_LSX(const uint8_t* src_y, uint8_t* dst_argb, int width);
 void J400ToARGBRow_RVV(const uint8_t* src_y, uint8_t* dst_argb, int width);
 void J400ToARGBRow_C(const uint8_t* src_y, uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("sse2")
 void J400ToARGBRow_Any_SSE2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("avx2")
 void J400ToARGBRow_Any_AVX2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
@@ -3774,6 +3997,7 @@ void I422ToRGB565Row_C(const uint8_t* src_y,
                        uint8_t* dst_rgb565,
                        const struct YuvConstants* yuvconstants,
                        int width);
+LIBYUV_TARGETING("avx2")
 void I422ToARGBRow_AVX2(const uint8_t* y_buf,
                         const uint8_t* u_buf,
                         const uint8_t* v_buf,
@@ -3786,36 +4010,42 @@ void I422ToARGBRow_AVX512BW(const uint8_t* y_buf,
                             uint8_t* dst_argb,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I422ToRGBARow_AVX2(const uint8_t* y_buf,
                         const uint8_t* u_buf,
                         const uint8_t* v_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void I444ToARGBRow_SSSE3(const uint8_t* y_buf,
                          const uint8_t* u_buf,
                          const uint8_t* v_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("avx2")
 void I444ToARGBRow_AVX2(const uint8_t* y_buf,
                         const uint8_t* u_buf,
                         const uint8_t* v_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void I444ToRGB24Row_SSSE3(const uint8_t* y_buf,
                           const uint8_t* u_buf,
                           const uint8_t* v_buf,
                           uint8_t* dst_rgb24,
                           const struct YuvConstants* yuvconstants,
                           int width);
+LIBYUV_TARGETING("avx2")
 void I444ToRGB24Row_AVX2(const uint8_t* y_buf,
                          const uint8_t* u_buf,
                          const uint8_t* v_buf,
                          uint8_t* dst_rgb24,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToARGBRow_SSSE3(const uint8_t* y_buf,
                          const uint8_t* u_buf,
                          const uint8_t* v_buf,
@@ -3823,48 +4053,56 @@ void I422ToARGBRow_SSSE3(const uint8_t* y_buf,
                          const struct YuvConstants* yuvconstants,
                          int width);
 
+LIBYUV_TARGETING("ssse3")
 void I422ToAR30Row_SSSE3(const uint8_t* y_buf,
                          const uint8_t* u_buf,
                          const uint8_t* v_buf,
                          uint8_t* dst_ar30,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I210ToAR30Row_SSSE3(const uint16_t* y_buf,
                          const uint16_t* u_buf,
                          const uint16_t* v_buf,
                          uint8_t* dst_ar30,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I210ToARGBRow_SSSE3(const uint16_t* y_buf,
                          const uint16_t* u_buf,
                          const uint16_t* v_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I212ToAR30Row_SSSE3(const uint16_t* y_buf,
                          const uint16_t* u_buf,
                          const uint16_t* v_buf,
                          uint8_t* dst_ar30,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I212ToARGBRow_SSSE3(const uint16_t* y_buf,
                          const uint16_t* u_buf,
                          const uint16_t* v_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I410ToAR30Row_SSSE3(const uint16_t* y_buf,
                          const uint16_t* u_buf,
                          const uint16_t* v_buf,
                          uint8_t* dst_ar30,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I410ToARGBRow_SSSE3(const uint16_t* y_buf,
                          const uint16_t* u_buf,
                          const uint16_t* v_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I210AlphaToARGBRow_SSSE3(const uint16_t* y_buf,
                               const uint16_t* u_buf,
                               const uint16_t* v_buf,
@@ -3872,6 +4110,7 @@ void I210AlphaToARGBRow_SSSE3(const uint16_t* y_buf,
                               uint8_t* dst_argb,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("ssse3")
 void I410AlphaToARGBRow_SSSE3(const uint16_t* y_buf,
                               const uint16_t* u_buf,
                               const uint16_t* v_buf,
@@ -3879,48 +4118,56 @@ void I410AlphaToARGBRow_SSSE3(const uint16_t* y_buf,
                               uint8_t* dst_argb,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("avx2")
 void I422ToAR30Row_AVX2(const uint8_t* y_buf,
                         const uint8_t* u_buf,
                         const uint8_t* v_buf,
                         uint8_t* dst_ar30,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I210ToARGBRow_AVX2(const uint16_t* y_buf,
                         const uint16_t* u_buf,
                         const uint16_t* v_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I210ToAR30Row_AVX2(const uint16_t* y_buf,
                         const uint16_t* u_buf,
                         const uint16_t* v_buf,
                         uint8_t* dst_ar30,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I212ToARGBRow_AVX2(const uint16_t* y_buf,
                         const uint16_t* u_buf,
                         const uint16_t* v_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I212ToAR30Row_AVX2(const uint16_t* y_buf,
                         const uint16_t* u_buf,
                         const uint16_t* v_buf,
                         uint8_t* dst_ar30,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I410ToAR30Row_AVX2(const uint16_t* y_buf,
                         const uint16_t* u_buf,
                         const uint16_t* v_buf,
                         uint8_t* dst_ar30,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I410ToARGBRow_AVX2(const uint16_t* y_buf,
                         const uint16_t* u_buf,
                         const uint16_t* v_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I210AlphaToARGBRow_AVX2(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
@@ -3928,6 +4175,7 @@ void I210AlphaToARGBRow_AVX2(const uint16_t* y_buf,
                              uint8_t* dst_argb,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void I410AlphaToARGBRow_AVX2(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
@@ -3935,6 +4183,7 @@ void I410AlphaToARGBRow_AVX2(const uint16_t* y_buf,
                              uint8_t* dst_argb,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I444AlphaToARGBRow_SSSE3(const uint8_t* y_buf,
                               const uint8_t* u_buf,
                               const uint8_t* v_buf,
@@ -3942,6 +4191,7 @@ void I444AlphaToARGBRow_SSSE3(const uint8_t* y_buf,
                               uint8_t* dst_argb,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("avx2")
 void I444AlphaToARGBRow_AVX2(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
@@ -3949,6 +4199,7 @@ void I444AlphaToARGBRow_AVX2(const uint8_t* y_buf,
                              uint8_t* dst_argb,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I422AlphaToARGBRow_SSSE3(const uint8_t* y_buf,
                               const uint8_t* u_buf,
                               const uint8_t* v_buf,
@@ -3956,6 +4207,7 @@ void I422AlphaToARGBRow_SSSE3(const uint8_t* y_buf,
                               uint8_t* dst_argb,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("avx2")
 void I422AlphaToARGBRow_AVX2(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
@@ -3963,176 +4215,210 @@ void I422AlphaToARGBRow_AVX2(const uint8_t* y_buf,
                              uint8_t* dst_argb,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void NV12ToARGBRow_SSSE3(const uint8_t* y_buf,
                          const uint8_t* uv_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("avx2")
 void NV12ToARGBRow_AVX2(const uint8_t* y_buf,
                         const uint8_t* uv_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void NV12ToRGB24Row_SSSE3(const uint8_t* src_y,
                           const uint8_t* src_uv,
                           uint8_t* dst_rgb24,
                           const struct YuvConstants* yuvconstants,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void NV21ToRGB24Row_SSSE3(const uint8_t* src_y,
                           const uint8_t* src_vu,
                           uint8_t* dst_rgb24,
                           const struct YuvConstants* yuvconstants,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void NV12ToRGB565Row_SSSE3(const uint8_t* src_y,
                            const uint8_t* src_uv,
                            uint8_t* dst_rgb565,
                            const struct YuvConstants* yuvconstants,
                            int width);
+LIBYUV_TARGETING("avx2")
 void NV12ToRGB24Row_AVX2(const uint8_t* src_y,
                          const uint8_t* src_uv,
                          uint8_t* dst_rgb24,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("avx2")
 void NV21ToRGB24Row_AVX2(const uint8_t* src_y,
                          const uint8_t* src_vu,
                          uint8_t* dst_rgb24,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void NV21ToYUV24Row_SSSE3(const uint8_t* src_y,
                           const uint8_t* src_vu,
                           uint8_t* dst_yuv24,
                           int width);
+LIBYUV_TARGETING("avx2")
 void NV21ToYUV24Row_AVX2(const uint8_t* src_y,
                          const uint8_t* src_vu,
                          uint8_t* dst_yuv24,
                          int width);
+LIBYUV_TARGETING("avx2")
 void NV12ToRGB565Row_AVX2(const uint8_t* src_y,
                           const uint8_t* src_uv,
                           uint8_t* dst_rgb565,
                           const struct YuvConstants* yuvconstants,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void NV21ToARGBRow_SSSE3(const uint8_t* y_buf,
                          const uint8_t* vu_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("avx2")
 void NV21ToARGBRow_AVX2(const uint8_t* y_buf,
                         const uint8_t* vu_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void YUY2ToARGBRow_SSSE3(const uint8_t* yuy2_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void UYVYToARGBRow_SSSE3(const uint8_t* uyvy_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToARGBRow_AVX2(const uint8_t* yuy2_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToARGBRow_AVX2(const uint8_t* uyvy_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
 
+LIBYUV_TARGETING("ssse3")
 void P210ToARGBRow_SSSE3(const uint16_t* y_buf,
                          const uint16_t* uv_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void P410ToARGBRow_SSSE3(const uint16_t* y_buf,
                          const uint16_t* uv_buf,
                          uint8_t* dst_argb,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void P210ToAR30Row_SSSE3(const uint16_t* y_buf,
                          const uint16_t* uv_buf,
                          uint8_t* dst_ar30,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void P410ToAR30Row_SSSE3(const uint16_t* y_buf,
                          const uint16_t* uv_buf,
                          uint8_t* dst_ar30,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("avx2")
 void P210ToARGBRow_AVX2(const uint16_t* y_buf,
                         const uint16_t* uv_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void P410ToARGBRow_AVX2(const uint16_t* y_buf,
                         const uint16_t* uv_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void P210ToAR30Row_AVX2(const uint16_t* y_buf,
                         const uint16_t* uv_buf,
                         uint8_t* dst_ar30,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void P410ToAR30Row_AVX2(const uint16_t* y_buf,
                         const uint16_t* uv_buf,
                         uint8_t* dst_ar30,
                         const struct YuvConstants* yuvconstants,
                         int width);
 
+LIBYUV_TARGETING("ssse3")
 void I422ToRGBARow_SSSE3(const uint8_t* y_buf,
                          const uint8_t* u_buf,
                          const uint8_t* v_buf,
                          uint8_t* dst_rgba,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToARGB4444Row_SSSE3(const uint8_t* src_y,
                              const uint8_t* src_u,
                              const uint8_t* src_v,
                              uint8_t* dst_argb4444,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void I422ToARGB4444Row_AVX2(const uint8_t* src_y,
                             const uint8_t* src_u,
                             const uint8_t* src_v,
                             uint8_t* dst_argb4444,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToARGB1555Row_SSSE3(const uint8_t* src_y,
                              const uint8_t* src_u,
                              const uint8_t* src_v,
                              uint8_t* dst_argb1555,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void I422ToARGB1555Row_AVX2(const uint8_t* src_y,
                             const uint8_t* src_u,
                             const uint8_t* src_v,
                             uint8_t* dst_argb1555,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToRGB565Row_SSSE3(const uint8_t* src_y,
                            const uint8_t* src_u,
                            const uint8_t* src_v,
                            uint8_t* dst_rgb565,
                            const struct YuvConstants* yuvconstants,
                            int width);
+LIBYUV_TARGETING("avx2")
 void I422ToRGB565Row_AVX2(const uint8_t* src_y,
                           const uint8_t* src_u,
                           const uint8_t* src_v,
                           uint8_t* dst_rgb565,
                           const struct YuvConstants* yuvconstants,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToRGB24Row_SSSE3(const uint8_t* y_buf,
                           const uint8_t* u_buf,
                           const uint8_t* v_buf,
                           uint8_t* dst_rgb24,
                           const struct YuvConstants* yuvconstants,
                           int width);
+LIBYUV_TARGETING("avx2")
 void I422ToRGB24Row_AVX2(const uint8_t* src_y,
                          const uint8_t* src_u,
                          const uint8_t* src_v,
                          uint8_t* dst_rgb24,
                          const struct YuvConstants* yuvconstants,
                          int width);
+LIBYUV_TARGETING("avx2")
 void I422ToARGBRow_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
@@ -4145,84 +4431,98 @@ void I422ToARGBRow_Any_AVX512BW(const uint8_t* y_buf,
                                 uint8_t* dst_ptr,
                                 const struct YuvConstants* yuvconstants,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void I422ToRGBARow_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void I444ToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I444ToRGB24Row_Any_SSSE3(const uint8_t* y_buf,
                               const uint8_t* u_buf,
                               const uint8_t* v_buf,
                               uint8_t* dst_ptr,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("avx2")
 void I444ToARGBRow_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I444ToRGB24Row_Any_AVX2(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToAR30Row_Any_SSSE3(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I210ToAR30Row_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I210ToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I212ToAR30Row_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I212ToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I410ToAR30Row_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I410ToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* u_buf,
                              const uint16_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I210AlphaToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                                   const uint16_t* u_buf,
                                   const uint16_t* v_buf,
@@ -4230,6 +4530,7 @@ void I210AlphaToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                                   uint8_t* dst_ptr,
                                   const struct YuvConstants* yuvconstants,
                                   int width);
+LIBYUV_TARGETING("ssse3")
 void I410AlphaToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                                   const uint16_t* u_buf,
                                   const uint16_t* v_buf,
@@ -4237,48 +4538,56 @@ void I410AlphaToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                                   uint8_t* dst_ptr,
                                   const struct YuvConstants* yuvconstants,
                                   int width);
+LIBYUV_TARGETING("avx2")
 void I422ToAR30Row_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I210ToARGBRow_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* u_buf,
                             const uint16_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I210ToAR30Row_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* u_buf,
                             const uint16_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I212ToARGBRow_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* u_buf,
                             const uint16_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I212ToAR30Row_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* u_buf,
                             const uint16_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I410ToAR30Row_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* u_buf,
                             const uint16_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I410ToARGBRow_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* u_buf,
                             const uint16_t* v_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I210AlphaToARGBRow_Any_AVX2(const uint16_t* y_buf,
                                  const uint16_t* u_buf,
                                  const uint16_t* v_buf,
@@ -4286,6 +4595,7 @@ void I210AlphaToARGBRow_Any_AVX2(const uint16_t* y_buf,
                                  uint8_t* dst_ptr,
                                  const struct YuvConstants* yuvconstants,
                                  int width);
+LIBYUV_TARGETING("avx2")
 void I410AlphaToARGBRow_Any_AVX2(const uint16_t* y_buf,
                                  const uint16_t* u_buf,
                                  const uint16_t* v_buf,
@@ -4293,6 +4603,7 @@ void I410AlphaToARGBRow_Any_AVX2(const uint16_t* y_buf,
                                  uint8_t* dst_ptr,
                                  const struct YuvConstants* yuvconstants,
                                  int width);
+LIBYUV_TARGETING("ssse3")
 void I444AlphaToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                                   const uint8_t* u_buf,
                                   const uint8_t* v_buf,
@@ -4300,6 +4611,7 @@ void I444AlphaToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                                   uint8_t* dst_ptr,
                                   const struct YuvConstants* yuvconstants,
                                   int width);
+LIBYUV_TARGETING("avx2")
 void I444AlphaToARGBRow_Any_AVX2(const uint8_t* y_buf,
                                  const uint8_t* u_buf,
                                  const uint8_t* v_buf,
@@ -4307,6 +4619,7 @@ void I444AlphaToARGBRow_Any_AVX2(const uint8_t* y_buf,
                                  uint8_t* dst_ptr,
                                  const struct YuvConstants* yuvconstants,
                                  int width);
+LIBYUV_TARGETING("ssse3")
 void I422AlphaToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                                   const uint8_t* u_buf,
                                   const uint8_t* v_buf,
@@ -4314,6 +4627,7 @@ void I422AlphaToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                                   uint8_t* dst_ptr,
                                   const struct YuvConstants* yuvconstants,
                                   int width);
+LIBYUV_TARGETING("avx2")
 void I422AlphaToARGBRow_Any_AVX2(const uint8_t* y_buf,
                                  const uint8_t* u_buf,
                                  const uint8_t* v_buf,
@@ -4321,168 +4635,201 @@ void I422AlphaToARGBRow_Any_AVX2(const uint8_t* y_buf,
                                  uint8_t* dst_ptr,
                                  const struct YuvConstants* yuvconstants,
                                  int width);
+LIBYUV_TARGETING("ssse3")
 void NV12ToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                              const uint8_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void NV12ToARGBRow_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* uv_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void NV21ToARGBRow_Any_SSSE3(const uint8_t* y_buf,
                              const uint8_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void NV21ToARGBRow_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* uv_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void NV12ToRGB24Row_Any_SSSE3(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("ssse3")
 void NV21ToRGB24Row_Any_SSSE3(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("avx2")
 void NV12ToRGB24Row_Any_AVX2(const uint8_t* y_buf,
                              const uint8_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void NV21ToRGB24Row_Any_AVX2(const uint8_t* y_buf,
                              const uint8_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void NV21ToYUV24Row_Any_SSSE3(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("avx2")
 void NV21ToYUV24Row_Any_AVX2(const uint8_t* y_buf,
                              const uint8_t* uv_buf,
                              uint8_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void NV12ToRGB565Row_Any_SSSE3(const uint8_t* y_buf,
                                const uint8_t* uv_buf,
                                uint8_t* dst_ptr,
                                const struct YuvConstants* yuvconstants,
                                int width);
+LIBYUV_TARGETING("avx2")
 void NV12ToRGB565Row_Any_AVX2(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("ssse3")
 void YUY2ToARGBRow_Any_SSSE3(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void UYVYToARGBRow_Any_SSSE3(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToARGBRow_Any_AVX2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToARGBRow_Any_AVX2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void P210ToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void P410ToARGBRow_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void P210ToAR30Row_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void P410ToAR30Row_Any_SSSE3(const uint16_t* y_buf,
                              const uint16_t* uv_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("avx2")
 void P210ToARGBRow_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* uv_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void P410ToARGBRow_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* uv_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void P210ToAR30Row_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* uv_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("avx2")
 void P410ToAR30Row_Any_AVX2(const uint16_t* y_buf,
                             const uint16_t* uv_buf,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* yuvconstants,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToRGBARow_Any_SSSE3(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
                              uint8_t* dst_ptr,
                              const struct YuvConstants* yuvconstants,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToARGB4444Row_Any_SSSE3(const uint8_t* y_buf,
                                  const uint8_t* u_buf,
                                  const uint8_t* v_buf,
                                  uint8_t* dst_ptr,
                                  const struct YuvConstants* yuvconstants,
                                  int width);
+LIBYUV_TARGETING("avx2")
 void I422ToARGB4444Row_Any_AVX2(const uint8_t* y_buf,
                                 const uint8_t* u_buf,
                                 const uint8_t* v_buf,
                                 uint8_t* dst_ptr,
                                 const struct YuvConstants* yuvconstants,
                                 int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToARGB1555Row_Any_SSSE3(const uint8_t* y_buf,
                                  const uint8_t* u_buf,
                                  const uint8_t* v_buf,
                                  uint8_t* dst_ptr,
                                  const struct YuvConstants* yuvconstants,
                                  int width);
+LIBYUV_TARGETING("avx2")
 void I422ToARGB1555Row_Any_AVX2(const uint8_t* y_buf,
                                 const uint8_t* u_buf,
                                 const uint8_t* v_buf,
                                 uint8_t* dst_ptr,
                                 const struct YuvConstants* yuvconstants,
                                 int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToRGB565Row_Any_SSSE3(const uint8_t* y_buf,
                                const uint8_t* u_buf,
                                const uint8_t* v_buf,
                                uint8_t* dst_ptr,
                                const struct YuvConstants* yuvconstants,
                                int width);
+LIBYUV_TARGETING("avx2")
 void I422ToRGB565Row_Any_AVX2(const uint8_t* y_buf,
                               const uint8_t* u_buf,
                               const uint8_t* v_buf,
                               uint8_t* dst_ptr,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("ssse3")
 void I422ToRGB24Row_Any_SSSE3(const uint8_t* y_buf,
                               const uint8_t* u_buf,
                               const uint8_t* v_buf,
                               uint8_t* dst_ptr,
                               const struct YuvConstants* yuvconstants,
                               int width);
+LIBYUV_TARGETING("avx2")
 void I422ToRGB24Row_Any_AVX2(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
@@ -4494,10 +4841,12 @@ void I400ToARGBRow_C(const uint8_t* src_y,
                      uint8_t* rgb_buf,
                      const struct YuvConstants* yuvconstants,
                      int width);
+LIBYUV_TARGETING("sse2")
 void I400ToARGBRow_SSE2(const uint8_t* y_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I400ToARGBRow_AVX2(const uint8_t* y_buf,
                         uint8_t* dst_argb,
                         const struct YuvConstants* yuvconstants,
@@ -4518,10 +4867,12 @@ void I400ToARGBRow_RVV(const uint8_t* src_y,
                        uint8_t* dst_argb,
                        const struct YuvConstants* yuvconstants,
                        int width);
+LIBYUV_TARGETING("sse2")
 void I400ToARGBRow_Any_SSE2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* param,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I400ToARGBRow_Any_AVX2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             const struct YuvConstants* param,
@@ -4540,6 +4891,7 @@ void I400ToARGBRow_Any_LSX(const uint8_t* src_ptr,
                            int width);
 
 // ARGB preattenuated alpha blend.
+LIBYUV_TARGETING("ssse3")
 void ARGBBlendRow_SSSE3(const uint8_t* src_argb,
                         const uint8_t* src_argb1,
                         uint8_t* dst_argb,
@@ -4566,21 +4918,25 @@ void ARGBBlendRow_C(const uint8_t* src_argb,
                     int width);
 
 // Unattenuated planar alpha blend.
+LIBYUV_TARGETING("ssse3")
 void BlendPlaneRow_SSSE3(const uint8_t* src0,
                          const uint8_t* src1,
                          const uint8_t* alpha,
                          uint8_t* dst,
                          int width);
+LIBYUV_TARGETING("ssse3")
 void BlendPlaneRow_Any_SSSE3(const uint8_t* y_buf,
                              const uint8_t* u_buf,
                              const uint8_t* v_buf,
                              uint8_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("avx2")
 void BlendPlaneRow_AVX2(const uint8_t* src0,
                         const uint8_t* src1,
                         const uint8_t* alpha,
                         uint8_t* dst,
                         int width);
+LIBYUV_TARGETING("avx2")
 void BlendPlaneRow_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
@@ -4603,18 +4959,22 @@ void ARGBMultiplyRow_C(const uint8_t* src_argb,
                        const uint8_t* src_argb1,
                        uint8_t* dst_argb,
                        int width);
+LIBYUV_TARGETING("sse2")
 void ARGBMultiplyRow_SSE2(const uint8_t* src_argb,
                           const uint8_t* src_argb1,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("sse2")
 void ARGBMultiplyRow_Any_SSE2(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("avx2")
 void ARGBMultiplyRow_AVX2(const uint8_t* src_argb,
                           const uint8_t* src_argb1,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("avx2")
 void ARGBMultiplyRow_Any_AVX2(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
@@ -4657,18 +5017,22 @@ void ARGBAddRow_C(const uint8_t* src_argb,
                   const uint8_t* src_argb1,
                   uint8_t* dst_argb,
                   int width);
+LIBYUV_TARGETING("sse2")
 void ARGBAddRow_SSE2(const uint8_t* src_argb,
                      const uint8_t* src_argb1,
                      uint8_t* dst_argb,
                      int width);
+LIBYUV_TARGETING("sse2")
 void ARGBAddRow_Any_SSE2(const uint8_t* y_buf,
                          const uint8_t* uv_buf,
                          uint8_t* dst_ptr,
                          int width);
+LIBYUV_TARGETING("avx2")
 void ARGBAddRow_AVX2(const uint8_t* src_argb,
                      const uint8_t* src_argb1,
                      uint8_t* dst_argb,
                      int width);
+LIBYUV_TARGETING("avx2")
 void ARGBAddRow_Any_AVX2(const uint8_t* y_buf,
                          const uint8_t* uv_buf,
                          uint8_t* dst_ptr,
@@ -4712,18 +5076,22 @@ void ARGBSubtractRow_C(const uint8_t* src_argb,
                        const uint8_t* src_argb1,
                        uint8_t* dst_argb,
                        int width);
+LIBYUV_TARGETING("sse2")
 void ARGBSubtractRow_SSE2(const uint8_t* src_argb,
                           const uint8_t* src_argb1,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("sse2")
 void ARGBSubtractRow_Any_SSE2(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("avx2")
 void ARGBSubtractRow_AVX2(const uint8_t* src_argb,
                           const uint8_t* src_argb1,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("avx2")
 void ARGBSubtractRow_Any_AVX2(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
@@ -4761,55 +5129,71 @@ void ARGBSubtractRow_Any_LASX(const uint8_t* y_buf,
                               uint8_t* dst_ptr,
                               int width);
 
+LIBYUV_TARGETING("ssse3")
 void ARGBToRGB24Row_Any_SSSE3(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToRAWRow_Any_SSSE3(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToRGB565Row_Any_SSE2(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToARGB1555Row_Any_SSE2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToARGB4444Row_Any_SSE2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("ssse3")
 void ABGRToAR30Row_Any_SSSE3(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBToAR30Row_Any_SSSE3(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToRAWRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToRGB24Row_Any_AVX2(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              int width);
 void ARGBToRGB24Row_Any_AVX512VBMI(const uint8_t* src_ptr,
                                    uint8_t* dst_ptr,
                                    int width);
+LIBYUV_TARGETING("sse2")
 void ARGBToRGB565DitherRow_Any_SSE2(const uint8_t* src_ptr,
                                     uint8_t* dst_ptr,
                                     const uint32_t param,
                                     int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToRGB565DitherRow_Any_AVX2(const uint8_t* src_ptr,
                                     uint8_t* dst_ptr,
                                     const uint32_t param,
                                     int width);
 
+LIBYUV_TARGETING("avx2")
 void ARGBToRGB565Row_Any_AVX2(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToARGB1555Row_Any_AVX2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToARGB4444Row_Any_AVX2(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void ABGRToAR30Row_Any_AVX2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("avx2")
 void ARGBToAR30Row_Any_AVX2(const uint8_t* src_ptr,
                             uint8_t* dst_ptr,
                             int width);
@@ -5226,30 +5610,38 @@ void UYVYToARGBRow_Any_LSX(const uint8_t* src_ptr,
                            const struct YuvConstants* yuvconstants,
                            int width);
 
+LIBYUV_TARGETING("avx2")
 void YUY2ToYRow_AVX2(const uint8_t* src_yuy2, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToUVRow_AVX2(const uint8_t* src_yuy2,
                       int stride_yuy2,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToNVUVRow_AVX2(const uint8_t* src_yuy2,
                         int stride_yuy2,
                         uint8_t* dst_uv,
                         int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToUV422Row_AVX2(const uint8_t* src_yuy2,
                          uint8_t* dst_u,
                          uint8_t* dst_v,
                          int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToYRow_SSE2(const uint8_t* src_yuy2, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToUVRow_SSE2(const uint8_t* src_yuy2,
                       int stride_yuy2,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToNVUVRow_SSE2(const uint8_t* src_yuy2,
                         int stride_yuy2,
                         uint8_t* dst_uv,
                         int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToUV422Row_SSE2(const uint8_t* src_yuy2,
                          uint8_t* dst_u,
                          uint8_t* dst_v,
@@ -5312,30 +5704,38 @@ void YUY2ToUV422Row_C(const uint8_t* src_yuy2,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToYRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToUVRow_Any_AVX2(const uint8_t* src_ptr,
                           int src_stride,
                           uint8_t* dst_u,
                           uint8_t* dst_v,
                           int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToNVUVRow_Any_AVX2(const uint8_t* src_yuy2,
                             int stride_yuy2,
                             uint8_t* dst_uv,
                             int width);
+LIBYUV_TARGETING("avx2")
 void YUY2ToUV422Row_Any_AVX2(const uint8_t* src_ptr,
                              uint8_t* dst_u,
                              uint8_t* dst_v,
                              int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToYRow_Any_SSE2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToUVRow_Any_SSE2(const uint8_t* src_ptr,
                           int src_stride,
                           uint8_t* dst_u,
                           uint8_t* dst_v,
                           int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToNVUVRow_Any_SSE2(const uint8_t* src_yuy2,
                             int stride_yuy2,
                             uint8_t* dst_uv,
                             int width);
+LIBYUV_TARGETING("sse2")
 void YUY2ToUV422Row_Any_SSE2(const uint8_t* src_ptr,
                              uint8_t* dst_u,
                              uint8_t* dst_v,
@@ -5384,32 +5784,41 @@ void YUY2ToUV422Row_Any_LASX(const uint8_t* src_ptr,
                              uint8_t* dst_u,
                              uint8_t* dst_v,
                              int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToYRow_AVX2(const uint8_t* src_uyvy, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToUVRow_AVX2(const uint8_t* src_uyvy,
                       int stride_uyvy,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToUV422Row_AVX2(const uint8_t* src_uyvy,
                          uint8_t* dst_u,
                          uint8_t* dst_v,
                          int width);
+LIBYUV_TARGETING("sse2")
 void UYVYToYRow_SSE2(const uint8_t* src_uyvy, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("sse2")
 void UYVYToUVRow_SSE2(const uint8_t* src_uyvy,
                       int stride_uyvy,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("sse2")
 void UYVYToUV422Row_SSE2(const uint8_t* src_uyvy,
                          uint8_t* dst_u,
                          uint8_t* dst_v,
                          int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToYRow_AVX2(const uint8_t* src_uyvy, uint8_t* dst_y, int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToUVRow_AVX2(const uint8_t* src_uyvy,
                       int stride_uyvy,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToUV422Row_AVX2(const uint8_t* src_uyvy,
                          uint8_t* dst_u,
                          uint8_t* dst_v,
@@ -5465,22 +5874,28 @@ void UYVYToUV422Row_C(const uint8_t* src_uyvy,
                       uint8_t* dst_u,
                       uint8_t* dst_v,
                       int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToYRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToUVRow_Any_AVX2(const uint8_t* src_ptr,
                           int src_stride,
                           uint8_t* dst_u,
                           uint8_t* dst_v,
                           int width);
+LIBYUV_TARGETING("avx2")
 void UYVYToUV422Row_Any_AVX2(const uint8_t* src_ptr,
                              uint8_t* dst_u,
                              uint8_t* dst_v,
                              int width);
+LIBYUV_TARGETING("sse2")
 void UYVYToYRow_Any_SSE2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("sse2")
 void UYVYToUVRow_Any_SSE2(const uint8_t* src_ptr,
                           int src_stride,
                           uint8_t* dst_u,
                           uint8_t* dst_v,
                           int width);
+LIBYUV_TARGETING("sse2")
 void UYVYToUV422Row_Any_SSE2(const uint8_t* src_ptr,
                              uint8_t* dst_u,
                              uint8_t* dst_v,
@@ -5528,9 +5943,13 @@ void UYVYToUV422Row_Any_LASX(const uint8_t* src_ptr,
 void SwapUVRow_C(const uint8_t* src_uv, uint8_t* dst_vu, int width);
 void SwapUVRow_NEON(const uint8_t* src_uv, uint8_t* dst_vu, int width);
 void SwapUVRow_Any_NEON(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("ssse3")
 void SwapUVRow_SSSE3(const uint8_t* src_uv, uint8_t* dst_vu, int width);
+LIBYUV_TARGETING("ssse3")
 void SwapUVRow_Any_SSSE3(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
+LIBYUV_TARGETING("avx2")
 void SwapUVRow_AVX2(const uint8_t* src_uv, uint8_t* dst_vu, int width);
+LIBYUV_TARGETING("avx2")
 void SwapUVRow_Any_AVX2(const uint8_t* src_ptr, uint8_t* dst_ptr, int width);
 void AYUVToYRow_C(const uint8_t* src_ayuv, uint8_t* dst_y, int width);
 void AYUVToUVRow_C(const uint8_t* src_ayuv,
@@ -5570,41 +5989,49 @@ void I422ToUYVYRow_C(const uint8_t* src_y,
                      const uint8_t* src_v,
                      uint8_t* dst_frame,
                      int width);
+LIBYUV_TARGETING("sse2")
 void I422ToYUY2Row_SSE2(const uint8_t* src_y,
                         const uint8_t* src_u,
                         const uint8_t* src_v,
                         uint8_t* dst_yuy2,
                         int width);
+LIBYUV_TARGETING("sse2")
 void I422ToUYVYRow_SSE2(const uint8_t* src_y,
                         const uint8_t* src_u,
                         const uint8_t* src_v,
                         uint8_t* dst_uyvy,
                         int width);
+LIBYUV_TARGETING("sse2")
 void I422ToYUY2Row_Any_SSE2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("sse2")
 void I422ToUYVYRow_Any_SSE2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I422ToYUY2Row_AVX2(const uint8_t* src_y,
                         const uint8_t* src_u,
                         const uint8_t* src_v,
                         uint8_t* dst_yuy2,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I422ToUYVYRow_AVX2(const uint8_t* src_y,
                         const uint8_t* src_u,
                         const uint8_t* src_v,
                         uint8_t* dst_uyvy,
                         int width);
+LIBYUV_TARGETING("avx2")
 void I422ToYUY2Row_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
                             uint8_t* dst_ptr,
                             int width);
+LIBYUV_TARGETING("avx2")
 void I422ToUYVYRow_Any_AVX2(const uint8_t* y_buf,
                             const uint8_t* u_buf,
                             const uint8_t* v_buf,
@@ -5693,9 +6120,11 @@ void I422ToUYVYRow_Any_LASX(const uint8_t* y_buf,
 
 // Effects related row functions.
 void ARGBAttenuateRow_C(const uint8_t* src_argb, uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBAttenuateRow_SSSE3(const uint8_t* src_argb,
                             uint8_t* dst_argb,
                             int width);
+LIBYUV_TARGETING("avx2")
 void ARGBAttenuateRow_AVX2(const uint8_t* src_argb,
                            uint8_t* dst_argb,
                            int width);
@@ -5714,9 +6143,11 @@ void ARGBAttenuateRow_LASX(const uint8_t* src_argb,
 void ARGBAttenuateRow_RVV(const uint8_t* src_argb,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBAttenuateRow_Any_SSSE3(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int width);
+LIBYUV_TARGETING("avx2")
 void ARGBAttenuateRow_Any_AVX2(const uint8_t* src_ptr,
                                uint8_t* dst_ptr,
                                int width);
@@ -5738,20 +6169,25 @@ extern const uint32_t fixed_invtbl8[256];
 void ARGBUnattenuateRow_C(const uint8_t* src_argb,
                           uint8_t* dst_argb,
                           int width);
+LIBYUV_TARGETING("sse2")
 void ARGBUnattenuateRow_SSE2(const uint8_t* src_argb,
                              uint8_t* dst_argb,
                              int width);
+LIBYUV_TARGETING("avx2")
 void ARGBUnattenuateRow_AVX2(const uint8_t* src_argb,
                              uint8_t* dst_argb,
                              int width);
+LIBYUV_TARGETING("sse2")
 void ARGBUnattenuateRow_Any_SSE2(const uint8_t* src_ptr,
                                  uint8_t* dst_ptr,
                                  int width);
+LIBYUV_TARGETING("avx2")
 void ARGBUnattenuateRow_Any_AVX2(const uint8_t* src_ptr,
                                  uint8_t* dst_ptr,
                                  int width);
 
 void ARGBGrayRow_C(const uint8_t* src_argb, uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBGrayRow_SSSE3(const uint8_t* src_argb, uint8_t* dst_argb, int width);
 void ARGBGrayRow_NEON(const uint8_t* src_argb, uint8_t* dst_argb, int width);
 void ARGBGrayRow_MSA(const uint8_t* src_argb, uint8_t* dst_argb, int width);
@@ -5759,6 +6195,7 @@ void ARGBGrayRow_LSX(const uint8_t* src_argb, uint8_t* dst_argb, int width);
 void ARGBGrayRow_LASX(const uint8_t* src_argb, uint8_t* dst_argb, int width);
 
 void ARGBSepiaRow_C(uint8_t* dst_argb, int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBSepiaRow_SSSE3(uint8_t* dst_argb, int width);
 void ARGBSepiaRow_NEON(uint8_t* dst_argb, int width);
 void ARGBSepiaRow_MSA(uint8_t* dst_argb, int width);
@@ -5769,6 +6206,7 @@ void ARGBColorMatrixRow_C(const uint8_t* src_argb,
                           uint8_t* dst_argb,
                           const int8_t* matrix_argb,
                           int width);
+LIBYUV_TARGETING("ssse3")
 void ARGBColorMatrixRow_SSSE3(const uint8_t* src_argb,
                               uint8_t* dst_argb,
                               const int8_t* matrix_argb,
@@ -5805,6 +6243,7 @@ void ARGBQuantizeRow_C(uint8_t* dst_argb,
                        int interval_size,
                        int interval_offset,
                        int width);
+LIBYUV_TARGETING("sse2")
 void ARGBQuantizeRow_SSE2(uint8_t* dst_argb,
                           int scale,
                           int interval_size,
@@ -5830,6 +6269,7 @@ void ARGBShadeRow_C(const uint8_t* src_argb,
                     uint8_t* dst_argb,
                     int width,
                     uint32_t value);
+LIBYUV_TARGETING("sse2")
 void ARGBShadeRow_SSE2(const uint8_t* src_argb,
                        uint8_t* dst_argb,
                        int width,
@@ -5852,12 +6292,14 @@ void ARGBShadeRow_LASX(const uint8_t* src_argb,
                        uint32_t value);
 
 // Used for blur.
+LIBYUV_TARGETING("sse2")
 void CumulativeSumToAverageRow_SSE2(const int32_t* topleft,
                                     const int32_t* botleft,
                                     int width,
                                     int area,
                                     uint8_t* dst,
                                     int count);
+LIBYUV_TARGETING("sse2")
 void ComputeCumulativeSumRow_SSE2(const uint8_t* row,
                                   int32_t* cumsum,
                                   const int32_t* previous_cumsum,
@@ -5881,6 +6323,7 @@ void ARGBAffineRow_C(const uint8_t* src_argb,
                      const float* uv_dudv,
                      int width);
 LIBYUV_API
+LIBYUV_TARGETING("sse2")
 void ARGBAffineRow_SSE2(const uint8_t* src_argb,
                         int src_argb_stride,
                         uint8_t* dst_argb,
@@ -5893,11 +6336,13 @@ void InterpolateRow_C(uint8_t* dst_ptr,
                       ptrdiff_t src_stride,
                       int width,
                       int source_y_fraction);
+LIBYUV_TARGETING("ssse3")
 void InterpolateRow_SSSE3(uint8_t* dst_ptr,
                           const uint8_t* src_ptr,
                           ptrdiff_t src_stride,
                           int dst_width,
                           int source_y_fraction);
+LIBYUV_TARGETING("avx2")
 void InterpolateRow_AVX2(uint8_t* dst_ptr,
                          const uint8_t* src_ptr,
                          ptrdiff_t src_stride,
@@ -5928,11 +6373,13 @@ void InterpolateRow_Any_NEON(uint8_t* dst_ptr,
                              ptrdiff_t src_stride_ptr,
                              int width,
                              int source_y_fraction);
+LIBYUV_TARGETING("ssse3")
 void InterpolateRow_Any_SSSE3(uint8_t* dst_ptr,
                               const uint8_t* src_ptr,
                               ptrdiff_t src_stride_ptr,
                               int width,
                               int source_y_fraction);
+LIBYUV_TARGETING("avx2")
 void InterpolateRow_Any_AVX2(uint8_t* dst_ptr,
                              const uint8_t* src_ptr,
                              ptrdiff_t src_stride_ptr,
@@ -5983,12 +6430,14 @@ void InterpolateRow_16To8_Any_NEON(uint8_t* dst_ptr,
                                    int scale,
                                    int width,
                                    int source_y_fraction);
+LIBYUV_TARGETING("avx2")
 void InterpolateRow_16To8_AVX2(uint8_t* dst_ptr,
                                const uint16_t* src_ptr,
                                ptrdiff_t src_stride,
                                int scale,
                                int width,
                                int source_y_fraction);
+LIBYUV_TARGETING("avx2")
 void InterpolateRow_16To8_Any_AVX2(uint8_t* dst_ptr,
                                    const uint16_t* src_ptr,
                                    ptrdiff_t src_stride,
@@ -6002,6 +6451,7 @@ void SobelXRow_C(const uint8_t* src_y0,
                  const uint8_t* src_y2,
                  uint8_t* dst_sobelx,
                  int width);
+LIBYUV_TARGETING("sse2")
 void SobelXRow_SSE2(const uint8_t* src_y0,
                     const uint8_t* src_y1,
                     const uint8_t* src_y2,
@@ -6021,6 +6471,7 @@ void SobelYRow_C(const uint8_t* src_y0,
                  const uint8_t* src_y1,
                  uint8_t* dst_sobely,
                  int width);
+LIBYUV_TARGETING("sse2")
 void SobelYRow_SSE2(const uint8_t* src_y0,
                     const uint8_t* src_y1,
                     uint8_t* dst_sobely,
@@ -6037,6 +6488,7 @@ void SobelRow_C(const uint8_t* src_sobelx,
                 const uint8_t* src_sobely,
                 uint8_t* dst_argb,
                 int width);
+LIBYUV_TARGETING("sse2")
 void SobelRow_SSE2(const uint8_t* src_sobelx,
                    const uint8_t* src_sobely,
                    uint8_t* dst_argb,
@@ -6057,6 +6509,7 @@ void SobelToPlaneRow_C(const uint8_t* src_sobelx,
                        const uint8_t* src_sobely,
                        uint8_t* dst_y,
                        int width);
+LIBYUV_TARGETING("sse2")
 void SobelToPlaneRow_SSE2(const uint8_t* src_sobelx,
                           const uint8_t* src_sobely,
                           uint8_t* dst_y,
@@ -6077,6 +6530,7 @@ void SobelXYRow_C(const uint8_t* src_sobelx,
                   const uint8_t* src_sobely,
                   uint8_t* dst_argb,
                   int width);
+LIBYUV_TARGETING("sse2")
 void SobelXYRow_SSE2(const uint8_t* src_sobelx,
                      const uint8_t* src_sobely,
                      uint8_t* dst_argb,
@@ -6093,6 +6547,7 @@ void SobelXYRow_LSX(const uint8_t* src_sobelx,
                     const uint8_t* src_sobely,
                     uint8_t* dst_argb,
                     int width);
+LIBYUV_TARGETING("sse2")
 void SobelRow_Any_SSE2(const uint8_t* y_buf,
                        const uint8_t* uv_buf,
                        uint8_t* dst_ptr,
@@ -6109,6 +6564,7 @@ void SobelRow_Any_LSX(const uint8_t* y_buf,
                       const uint8_t* uv_buf,
                       uint8_t* dst_ptr,
                       int width);
+LIBYUV_TARGETING("sse2")
 void SobelToPlaneRow_Any_SSE2(const uint8_t* y_buf,
                               const uint8_t* uv_buf,
                               uint8_t* dst_ptr,
@@ -6125,6 +6581,7 @@ void SobelToPlaneRow_Any_LSX(const uint8_t* y_buf,
                              const uint8_t* uv_buf,
                              uint8_t* dst_ptr,
                              int width);
+LIBYUV_TARGETING("sse2")
 void SobelXYRow_Any_SSE2(const uint8_t* y_buf,
                          const uint8_t* uv_buf,
                          uint8_t* dst_ptr,
@@ -6146,10 +6603,12 @@ void ARGBPolynomialRow_C(const uint8_t* src_argb,
                          uint8_t* dst_argb,
                          const float* poly,
                          int width);
+LIBYUV_TARGETING("sse2")
 void ARGBPolynomialRow_SSE2(const uint8_t* src_argb,
                             uint8_t* dst_argb,
                             const float* poly,
                             int width);
+LIBYUV_TARGETING("avx2")
 void ARGBPolynomialRow_AVX2(const uint8_t* src_argb,
                             uint8_t* dst_argb,
                             const float* poly,
@@ -6157,18 +6616,22 @@ void ARGBPolynomialRow_AVX2(const uint8_t* src_argb,
 
 // Scale and convert to half float.
 void HalfFloatRow_C(const uint16_t* src, uint16_t* dst, float scale, int width);
+LIBYUV_TARGETING("sse2")
 void HalfFloatRow_SSE2(const uint16_t* src,
                        uint16_t* dst,
                        float scale,
                        int width);
+LIBYUV_TARGETING("sse2")
 void HalfFloatRow_Any_SSE2(const uint16_t* src_ptr,
                            uint16_t* dst_ptr,
                            float param,
                            int width);
+LIBYUV_TARGETING("avx2")
 void HalfFloatRow_AVX2(const uint16_t* src,
                        uint16_t* dst,
                        float scale,
                        int width);
+LIBYUV_TARGETING("avx2")
 void HalfFloatRow_Any_AVX2(const uint16_t* src_ptr,
                            uint16_t* dst_ptr,
                            float param,
@@ -6248,6 +6711,7 @@ void ARGBLumaColorTableRow_C(const uint8_t* src_argb,
                              int width,
                              const uint8_t* luma,
                              uint32_t lumacoeff);
+LIBYUV_TARGETING("ssse3")
 void ARGBLumaColorTableRow_SSSE3(const uint8_t* src_argb,
                                  uint8_t* dst_argb,
                                  int width,
@@ -6295,6 +6759,7 @@ void GaussCol_C(const uint16_t* src0,
                 uint32_t* dst,
                 int width);
 
+LIBYUV_TARGETING("sse2")
 void ClampFloatToZero_SSE2(const float* src_x, float* dst_y, int width);
 
 #ifdef __cplusplus

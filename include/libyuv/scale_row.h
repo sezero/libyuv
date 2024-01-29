@@ -20,7 +20,7 @@ extern "C" {
 
 #if defined(__pnacl__) || defined(__CLR_VER) ||            \
     (defined(__native_client__) && defined(__x86_64__)) || \
-    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__))
+    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__) && !defined(__clang__) && !defined(GCC_X86_TARGET_ATTRIBS))
 #define LIBYUV_DISABLE_X86
 #endif
 #if defined(__native_client__)
@@ -628,273 +628,341 @@ void ScaleUVFilterCols64_C(uint8_t* dst_uv,
                            int dx);
 
 // Specialized scalers for x86.
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown2_SSSE3(const uint8_t* src_ptr,
                          ptrdiff_t src_stride,
                          uint8_t* dst_ptr,
                          int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown2Linear_SSSE3(const uint8_t* src_ptr,
                                ptrdiff_t src_stride,
                                uint8_t* dst_ptr,
                                int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown2Box_SSSE3(const uint8_t* src_ptr,
                             ptrdiff_t src_stride,
                             uint8_t* dst_ptr,
                             int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown2_AVX2(const uint8_t* src_ptr,
                         ptrdiff_t src_stride,
                         uint8_t* dst_ptr,
                         int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown2Linear_AVX2(const uint8_t* src_ptr,
                               ptrdiff_t src_stride,
                               uint8_t* dst_ptr,
                               int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown2Box_AVX2(const uint8_t* src_ptr,
                            ptrdiff_t src_stride,
                            uint8_t* dst_ptr,
                            int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown4_SSSE3(const uint8_t* src_ptr,
                          ptrdiff_t src_stride,
                          uint8_t* dst_ptr,
                          int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown4Box_SSSE3(const uint8_t* src_ptr,
                             ptrdiff_t src_stride,
                             uint8_t* dst_ptr,
                             int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown4_AVX2(const uint8_t* src_ptr,
                         ptrdiff_t src_stride,
                         uint8_t* dst_ptr,
                         int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown4Box_AVX2(const uint8_t* src_ptr,
                            ptrdiff_t src_stride,
                            uint8_t* dst_ptr,
                            int dst_width);
 
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown34_SSSE3(const uint8_t* src_ptr,
                           ptrdiff_t src_stride,
                           uint8_t* dst_ptr,
                           int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown34_1_Box_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown34_0_Box_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown38_SSSE3(const uint8_t* src_ptr,
                           ptrdiff_t src_stride,
                           uint8_t* dst_ptr,
                           int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown38_3_Box_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown38_2_Box_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
 
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Linear_SSE2(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Bilinear_SSE2(const uint8_t* src_ptr,
                                ptrdiff_t src_stride,
                                uint8_t* dst_ptr,
                                ptrdiff_t dst_stride,
                                int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Linear_12_SSSE3(const uint16_t* src_ptr,
                                  uint16_t* dst_ptr,
                                  int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Bilinear_12_SSSE3(const uint16_t* src_ptr,
                                    ptrdiff_t src_stride,
                                    uint16_t* dst_ptr,
                                    ptrdiff_t dst_stride,
                                    int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Linear_16_SSE2(const uint16_t* src_ptr,
                                 uint16_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Bilinear_16_SSE2(const uint16_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   uint16_t* dst_ptr,
                                   ptrdiff_t dst_stride,
                                   int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Linear_SSSE3(const uint8_t* src_ptr,
                               uint8_t* dst_ptr,
                               int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Bilinear_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 ptrdiff_t dst_stride,
                                 int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Linear_AVX2(const uint8_t* src_ptr,
                              uint8_t* dst_ptr,
                              int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Bilinear_AVX2(const uint8_t* src_ptr,
                                ptrdiff_t src_stride,
                                uint8_t* dst_ptr,
                                ptrdiff_t dst_stride,
                                int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Linear_12_AVX2(const uint16_t* src_ptr,
                                 uint16_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Bilinear_12_AVX2(const uint16_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   uint16_t* dst_ptr,
                                   ptrdiff_t dst_stride,
                                   int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Linear_16_AVX2(const uint16_t* src_ptr,
                                 uint16_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Bilinear_16_AVX2(const uint16_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   uint16_t* dst_ptr,
                                   ptrdiff_t dst_stride,
                                   int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Linear_Any_SSE2(const uint8_t* src_ptr,
                                  uint8_t* dst_ptr,
                                  int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Bilinear_Any_SSE2(const uint8_t* src_ptr,
                                    ptrdiff_t src_stride,
                                    uint8_t* dst_ptr,
                                    ptrdiff_t dst_stride,
                                    int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Linear_12_Any_SSSE3(const uint16_t* src_ptr,
                                      uint16_t* dst_ptr,
                                      int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Bilinear_12_Any_SSSE3(const uint16_t* src_ptr,
                                        ptrdiff_t src_stride,
                                        uint16_t* dst_ptr,
                                        ptrdiff_t dst_stride,
                                        int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Linear_16_Any_SSE2(const uint16_t* src_ptr,
                                     uint16_t* dst_ptr,
                                     int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleRowUp2_Bilinear_16_Any_SSE2(const uint16_t* src_ptr,
                                       ptrdiff_t src_stride,
                                       uint16_t* dst_ptr,
                                       ptrdiff_t dst_stride,
                                       int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Linear_Any_SSSE3(const uint8_t* src_ptr,
                                   uint8_t* dst_ptr,
                                   int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowUp2_Bilinear_Any_SSSE3(const uint8_t* src_ptr,
                                     ptrdiff_t src_stride,
                                     uint8_t* dst_ptr,
                                     ptrdiff_t dst_stride,
                                     int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Linear_Any_AVX2(const uint8_t* src_ptr,
                                  uint8_t* dst_ptr,
                                  int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Bilinear_Any_AVX2(const uint8_t* src_ptr,
                                    ptrdiff_t src_stride,
                                    uint8_t* dst_ptr,
                                    ptrdiff_t dst_stride,
                                    int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Linear_12_Any_AVX2(const uint16_t* src_ptr,
                                     uint16_t* dst_ptr,
                                     int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Bilinear_12_Any_AVX2(const uint16_t* src_ptr,
                                       ptrdiff_t src_stride,
                                       uint16_t* dst_ptr,
                                       ptrdiff_t dst_stride,
                                       int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Linear_16_Any_AVX2(const uint16_t* src_ptr,
                                     uint16_t* dst_ptr,
                                     int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowUp2_Bilinear_16_Any_AVX2(const uint16_t* src_ptr,
                                       ptrdiff_t src_stride,
                                       uint16_t* dst_ptr,
                                       ptrdiff_t dst_stride,
                                       int dst_width);
 
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown2_Any_SSSE3(const uint8_t* src_ptr,
                              ptrdiff_t src_stride,
                              uint8_t* dst_ptr,
                              int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown2Linear_Any_SSSE3(const uint8_t* src_ptr,
                                    ptrdiff_t src_stride,
                                    uint8_t* dst_ptr,
                                    int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown2Box_Any_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown2Box_Odd_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown2_Any_AVX2(const uint8_t* src_ptr,
                             ptrdiff_t src_stride,
                             uint8_t* dst_ptr,
                             int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown2Linear_Any_AVX2(const uint8_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   uint8_t* dst_ptr,
                                   int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown2Box_Any_AVX2(const uint8_t* src_ptr,
                                ptrdiff_t src_stride,
                                uint8_t* dst_ptr,
                                int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown2Box_Odd_AVX2(const uint8_t* src_ptr,
                                ptrdiff_t src_stride,
                                uint8_t* dst_ptr,
                                int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown4_Any_SSSE3(const uint8_t* src_ptr,
                              ptrdiff_t src_stride,
                              uint8_t* dst_ptr,
                              int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown4Box_Any_SSSE3(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown4_Any_AVX2(const uint8_t* src_ptr,
                             ptrdiff_t src_stride,
                             uint8_t* dst_ptr,
                             int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleRowDown4Box_Any_AVX2(const uint8_t* src_ptr,
                                ptrdiff_t src_stride,
                                uint8_t* dst_ptr,
                                int dst_width);
 
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown34_Any_SSSE3(const uint8_t* src_ptr,
                               ptrdiff_t src_stride,
                               uint8_t* dst_ptr,
                               int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown34_1_Box_Any_SSSE3(const uint8_t* src_ptr,
                                     ptrdiff_t src_stride,
                                     uint8_t* dst_ptr,
                                     int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown34_0_Box_Any_SSSE3(const uint8_t* src_ptr,
                                     ptrdiff_t src_stride,
                                     uint8_t* dst_ptr,
                                     int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown38_Any_SSSE3(const uint8_t* src_ptr,
                               ptrdiff_t src_stride,
                               uint8_t* dst_ptr,
                               int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown38_3_Box_Any_SSSE3(const uint8_t* src_ptr,
                                     ptrdiff_t src_stride,
                                     uint8_t* dst_ptr,
                                     int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleRowDown38_2_Box_Any_SSSE3(const uint8_t* src_ptr,
                                     ptrdiff_t src_stride,
                                     uint8_t* dst_ptr,
                                     int dst_width);
 
+LIBYUV_TARGETING("sse2")
 void ScaleAddRow_SSE2(const uint8_t* src_ptr, uint16_t* dst_ptr, int src_width);
+LIBYUV_TARGETING("avx2")
 void ScaleAddRow_AVX2(const uint8_t* src_ptr, uint16_t* dst_ptr, int src_width);
+LIBYUV_TARGETING("sse2")
 void ScaleAddRow_Any_SSE2(const uint8_t* src_ptr,
                           uint16_t* dst_ptr,
                           int src_width);
+LIBYUV_TARGETING("avx2")
 void ScaleAddRow_Any_AVX2(const uint8_t* src_ptr,
                           uint16_t* dst_ptr,
                           int src_width);
 
+LIBYUV_TARGETING("ssse3")
 void ScaleFilterCols_SSSE3(uint8_t* dst_ptr,
                            const uint8_t* src_ptr,
                            int dst_width,
                            int x,
                            int dx);
+LIBYUV_TARGETING("sse2")
 void ScaleColsUp2_SSE2(uint8_t* dst_ptr,
                        const uint8_t* src_ptr,
                        int dst_width,
@@ -902,16 +970,19 @@ void ScaleColsUp2_SSE2(uint8_t* dst_ptr,
                        int dx);
 
 // ARGB Column functions
+LIBYUV_TARGETING("sse2")
 void ScaleARGBCols_SSE2(uint8_t* dst_argb,
                         const uint8_t* src_argb,
                         int dst_width,
                         int x,
                         int dx);
+LIBYUV_TARGETING("ssse3")
 void ScaleARGBFilterCols_SSSE3(uint8_t* dst_argb,
                                const uint8_t* src_argb,
                                int dst_width,
                                int x,
                                int dx);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBColsUp2_SSE2(uint8_t* dst_argb,
                            const uint8_t* src_argb,
                            int dst_width,
@@ -959,14 +1030,17 @@ void ScaleARGBCols_Any_MSA(uint8_t* dst_ptr,
                            int dx);
 
 // ARGB Row functions
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDown2_SSE2(const uint8_t* src_argb,
                             ptrdiff_t src_stride,
                             uint8_t* dst_argb,
                             int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDown2Linear_SSE2(const uint8_t* src_argb,
                                   ptrdiff_t src_stride,
                                   uint8_t* dst_argb,
                                   int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDown2Box_SSE2(const uint8_t* src_argb,
                                ptrdiff_t src_stride,
                                uint8_t* dst_argb,
@@ -1019,14 +1093,17 @@ void ScaleARGBRowDown2Box_LSX(const uint8_t* src_argb,
                               ptrdiff_t src_stride,
                               uint8_t* dst_argb,
                               int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDown2_Any_SSE2(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDown2Linear_Any_SSE2(const uint8_t* src_ptr,
                                       ptrdiff_t src_stride,
                                       uint8_t* dst_ptr,
                                       int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDown2Box_Any_SSE2(const uint8_t* src_ptr,
                                    ptrdiff_t src_stride,
                                    uint8_t* dst_ptr,
@@ -1067,11 +1144,13 @@ void ScaleARGBRowDown2Box_Any_LSX(const uint8_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   uint8_t* dst_ptr,
                                   int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDownEven_SSE2(const uint8_t* src_argb,
                                ptrdiff_t src_stride,
                                int src_stepx,
                                uint8_t* dst_argb,
                                int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDownEvenBox_SSE2(const uint8_t* src_argb,
                                   ptrdiff_t src_stride,
                                   int src_stepx,
@@ -1117,11 +1196,13 @@ void ScaleARGBRowDownEvenBox_RVV(const uint8_t* src_argb,
                                  int src_stepx,
                                  uint8_t* dst_argb,
                                  int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDownEven_Any_SSE2(const uint8_t* src_ptr,
                                    ptrdiff_t src_stride,
                                    int src_stepx,
                                    uint8_t* dst_ptr,
                                    int dst_width);
+LIBYUV_TARGETING("sse2")
 void ScaleARGBRowDownEvenBox_Any_SSE2(const uint8_t* src_ptr,
                                       ptrdiff_t src_stride,
                                       int src_stepx,
@@ -1159,18 +1240,22 @@ void ScaleARGBRowDownEvenBox_Any_LSX(const uint8_t* src_ptr,
                                      int dst_width);
 
 // UV Row functions
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDown2_SSSE3(const uint8_t* src_ptr,
                            ptrdiff_t src_stride,
                            uint8_t* dst_uv,
                            int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDown2Linear_SSSE3(const uint8_t* src_ptr,
                                  ptrdiff_t src_stride,
                                  uint8_t* dst_uv,
                                  int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDown2Box_SSSE3(const uint8_t* src_ptr,
                               ptrdiff_t src_stride,
                               uint8_t* dst_uv,
                               int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowDown2Box_AVX2(const uint8_t* src_ptr,
                              ptrdiff_t src_stride,
                              uint8_t* dst_uv,
@@ -1211,18 +1296,22 @@ void ScaleUVRowDown2Box_RVV(const uint8_t* src_ptr,
                             ptrdiff_t src_stride,
                             uint8_t* dst,
                             int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDown2_Any_SSSE3(const uint8_t* src_ptr,
                                ptrdiff_t src_stride,
                                uint8_t* dst_ptr,
                                int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDown2Linear_Any_SSSE3(const uint8_t* src_ptr,
                                      ptrdiff_t src_stride,
                                      uint8_t* dst_ptr,
                                      int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDown2Box_Any_SSSE3(const uint8_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   uint8_t* dst_ptr,
                                   int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowDown2Box_Any_AVX2(const uint8_t* src_ptr,
                                  ptrdiff_t src_stride,
                                  uint8_t* dst_ptr,
@@ -1251,11 +1340,13 @@ void ScaleUVRowDown2Box_Any_MSA(const uint8_t* src_ptr,
                                 ptrdiff_t src_stride,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDownEven_SSSE3(const uint8_t* src_ptr,
                               ptrdiff_t src_stride,
                               int src_stepx,
                               uint8_t* dst_uv,
                               int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDownEvenBox_SSSE3(const uint8_t* src_ptr,
                                  ptrdiff_t src_stride,
                                  int src_stepx,
@@ -1291,11 +1382,13 @@ void ScaleUVRowDownEvenBox_MSA(const uint8_t* src_ptr,
                                int src_stepx,
                                uint8_t* dst_uv,
                                int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDownEven_Any_SSSE3(const uint8_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   int src_stepx,
                                   uint8_t* dst_ptr,
                                   int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowDownEvenBox_Any_SSSE3(const uint8_t* src_ptr,
                                      ptrdiff_t src_stride,
                                      int src_stepx,
@@ -1322,33 +1415,41 @@ void ScaleUVRowDownEvenBox_Any_MSA(const uint8_t* src_ptr,
                                    uint8_t* dst_ptr,
                                    int dst_width);
 
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowUp2_Linear_SSSE3(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowUp2_Bilinear_SSSE3(const uint8_t* src_ptr,
                                   ptrdiff_t src_stride,
                                   uint8_t* dst_ptr,
                                   ptrdiff_t dst_stride,
                                   int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowUp2_Linear_Any_SSSE3(const uint8_t* src_ptr,
                                     uint8_t* dst_ptr,
                                     int dst_width);
+LIBYUV_TARGETING("ssse3")
 void ScaleUVRowUp2_Bilinear_Any_SSSE3(const uint8_t* src_ptr,
                                       ptrdiff_t src_stride,
                                       uint8_t* dst_ptr,
                                       ptrdiff_t dst_stride,
                                       int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Linear_AVX2(const uint8_t* src_ptr,
                                uint8_t* dst_ptr,
                                int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Bilinear_AVX2(const uint8_t* src_ptr,
                                  ptrdiff_t src_stride,
                                  uint8_t* dst_ptr,
                                  ptrdiff_t dst_stride,
                                  int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Linear_Any_AVX2(const uint8_t* src_ptr,
                                    uint8_t* dst_ptr,
                                    int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Bilinear_Any_AVX2(const uint8_t* src_ptr,
                                      ptrdiff_t src_stride,
                                      uint8_t* dst_ptr,
@@ -1378,33 +1479,41 @@ void ScaleUVRowUp2_Bilinear_RVV(const uint8_t* src_ptr,
                                 uint8_t* dst_ptr,
                                 ptrdiff_t dst_stride,
                                 int dst_width);
+LIBYUV_TARGETING("sse4.1")
 void ScaleUVRowUp2_Linear_16_SSE41(const uint16_t* src_ptr,
                                    uint16_t* dst_ptr,
                                    int dst_width);
+LIBYUV_TARGETING("sse4.1")
 void ScaleUVRowUp2_Bilinear_16_SSE41(const uint16_t* src_ptr,
                                      ptrdiff_t src_stride,
                                      uint16_t* dst_ptr,
                                      ptrdiff_t dst_stride,
                                      int dst_width);
+LIBYUV_TARGETING("sse4.1")
 void ScaleUVRowUp2_Linear_16_Any_SSE41(const uint16_t* src_ptr,
                                        uint16_t* dst_ptr,
                                        int dst_width);
+LIBYUV_TARGETING("sse4.1")
 void ScaleUVRowUp2_Bilinear_16_Any_SSE41(const uint16_t* src_ptr,
                                          ptrdiff_t src_stride,
                                          uint16_t* dst_ptr,
                                          ptrdiff_t dst_stride,
                                          int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Linear_16_AVX2(const uint16_t* src_ptr,
                                   uint16_t* dst_ptr,
                                   int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Bilinear_16_AVX2(const uint16_t* src_ptr,
                                     ptrdiff_t src_stride,
                                     uint16_t* dst_ptr,
                                     ptrdiff_t dst_stride,
                                     int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Linear_16_Any_AVX2(const uint16_t* src_ptr,
                                       uint16_t* dst_ptr,
                                       int dst_width);
+LIBYUV_TARGETING("avx2")
 void ScaleUVRowUp2_Bilinear_16_Any_AVX2(const uint16_t* src_ptr,
                                         ptrdiff_t src_stride,
                                         uint16_t* dst_ptr,
