@@ -14,7 +14,6 @@
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -129,7 +128,6 @@ void CpuId(int info_eax, int info_ecx, int* cpu_info);
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_CPU_ID_H_

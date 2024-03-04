@@ -17,7 +17,6 @@
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -6300,7 +6299,6 @@ void ClampFloatToZero_SSE2(const float* src_x, float* dst_y, int width);
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_ROW_H_

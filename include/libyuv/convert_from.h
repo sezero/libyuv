@@ -15,7 +15,6 @@
 #include "libyuv/rotate.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -197,7 +196,6 @@ int ConvertFromI420(const uint8_t* y,
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_CONVERT_FROM_H_

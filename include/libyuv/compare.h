@@ -14,7 +14,6 @@
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -105,7 +104,6 @@ double I420Ssim(const uint8_t* src_y_a,
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_COMPARE_H_

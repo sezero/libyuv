@@ -17,7 +17,6 @@
 #include "libyuv/scale.h"   // For enum FilterMode.
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -2329,7 +2328,6 @@ int ConvertToARGB(const uint8_t* sample,
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_CONVERT_ARGB_H_

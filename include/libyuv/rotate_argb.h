@@ -15,7 +15,6 @@
 #include "libyuv/rotate.h"  // For RotationMode.
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -31,7 +30,6 @@ int ARGBRotate(const uint8_t* src_argb,
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_ROTATE_ARGB_H_

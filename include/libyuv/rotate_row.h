@@ -14,7 +14,6 @@
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
-namespace libyuv {
 extern "C" {
 #endif
 
@@ -266,7 +265,6 @@ void Transpose4x4_32_C(const uint8_t* src,
 
 #ifdef __cplusplus
 }  // extern "C"
-}  // namespace libyuv
 #endif
 
 #endif  // INCLUDE_LIBYUV_ROTATE_ROW_H_
