@@ -47,6 +47,13 @@ extern "C" {
 #endif  // clang >= 3.4
 #endif  // __clang__
 
+// GCC >= 4.7.0 required for AVX2.
+#if defined(__GNUC__) && (defined(__x86_64__) || defined(__i386__))
+#if (__GNUC__ > 4) || (__GNUC__ == 4 && (__GNUC_MINOR__ >= 7))
+#define GCC_HAS_AVX2 1
+#endif  // GNUC >= 4.7
+#endif  // __GNUC__
+
 // The following are available for Visual C and GCC:
 #if !defined(LIBYUV_DISABLE_X86) && \
     (defined(__x86_64__) || defined(__i386__) || defined(_M_IX86))
@@ -69,7 +76,8 @@ extern "C" {
 #endif
 
 // The following are available for GCC and clangcl:
-#if !defined(LIBYUV_DISABLE_X86) && defined(CLANG_HAS_AVX2) && \
+#if !defined(LIBYUV_DISABLE_X86) && \
+    (defined(CLANG_HAS_AVX2) || defined(GCC_HAS_AVX2)) && \
     (defined(__x86_64__) || defined(__i386__))
 #define HAS_HAMMINGDISTANCE_AVX2
 #endif
