@@ -19,7 +19,7 @@ extern "C" {
 
 #if defined(__pnacl__) || defined(__CLR_VER) ||            \
     (defined(__native_client__) && defined(__x86_64__)) || \
-    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__))
+    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__) && !defined(GCC_X86_TARGET_ATTRIBS))
 #define LIBYUV_DISABLE_X86
 #endif
 #if defined(__native_client__)
@@ -93,11 +93,13 @@ void TransposeWx8_NEON(const uint8_t* src,
                        uint8_t* dst,
                        int dst_stride,
                        int width);
+LIBYUV_TARGETING("ssse3")
 void TransposeWx8_SSSE3(const uint8_t* src,
                         int src_stride,
                         uint8_t* dst,
                         int dst_stride,
                         int width);
+LIBYUV_TARGETING("ssse3")
 void TransposeWx8_Fast_SSSE3(const uint8_t* src,
                              int src_stride,
                              uint8_t* dst,
@@ -119,11 +121,13 @@ void TransposeWx8_Any_NEON(const uint8_t* src,
                            uint8_t* dst,
                            int dst_stride,
                            int width);
+LIBYUV_TARGETING("ssse3")
 void TransposeWx8_Any_SSSE3(const uint8_t* src,
                             int src_stride,
                             uint8_t* dst,
                             int dst_stride,
                             int width);
+LIBYUV_TARGETING("ssse3")
 void TransposeWx8_Fast_Any_SSSE3(const uint8_t* src,
                                  int src_stride,
                                  uint8_t* dst,
@@ -163,6 +167,7 @@ void TransposeUVWx16_C(const uint8_t* src,
                        uint8_t* dst_b,
                        int dst_stride_b,
                        int width);
+LIBYUV_TARGETING("sse2")
 void TransposeUVWx8_SSE2(const uint8_t* src,
                          int src_stride,
                          uint8_t* dst_a,
@@ -192,6 +197,7 @@ void TransposeUVWx16_LSX(const uint8_t* src,
                          int dst_stride_b,
                          int width);
 
+LIBYUV_TARGETING("sse2")
 void TransposeUVWx8_Any_SSE2(const uint8_t* src,
                              int src_stride,
                              uint8_t* dst_a,
@@ -245,12 +251,14 @@ void Transpose4x4_32_NEON(const uint8_t* src,
                           int dst_stride,
                           int width);
 
+LIBYUV_TARGETING("sse2")
 void Transpose4x4_32_SSE2(const uint8_t* src,
                           int src_stride,
                           uint8_t* dst,
                           int dst_stride,
                           int width);
 
+LIBYUV_TARGETING("avx2")
 void Transpose4x4_32_AVX2(const uint8_t* src,
                           int src_stride,
                           uint8_t* dst,

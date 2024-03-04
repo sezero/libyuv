@@ -19,7 +19,7 @@ extern "C" {
 
 #if defined(__pnacl__) || defined(__CLR_VER) ||            \
     (defined(__native_client__) && defined(__x86_64__)) || \
-    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__))
+    (defined(__i386__) && !defined(__SSE__) && !defined(__clang__) && !defined(GCC_X86_TARGET_ATTRIBS))
 #define LIBYUV_DISABLE_X86
 #endif
 #if defined(__native_client__)
@@ -89,12 +89,15 @@ extern "C" {
 uint32_t HammingDistance_C(const uint8_t* src_a,
                            const uint8_t* src_b,
                            int count);
+LIBYUV_TARGETING("sse4.2")
 uint32_t HammingDistance_SSE42(const uint8_t* src_a,
                                const uint8_t* src_b,
                                int count);
+LIBYUV_TARGETING("ssse3")
 uint32_t HammingDistance_SSSE3(const uint8_t* src_a,
                                const uint8_t* src_b,
                                int count);
+LIBYUV_TARGETING("avx2")
 uint32_t HammingDistance_AVX2(const uint8_t* src_a,
                               const uint8_t* src_b,
                               int count);
@@ -107,9 +110,11 @@ uint32_t HammingDistance_MSA(const uint8_t* src_a,
 uint32_t SumSquareError_C(const uint8_t* src_a,
                           const uint8_t* src_b,
                           int count);
+LIBYUV_TARGETING("sse2")
 uint32_t SumSquareError_SSE2(const uint8_t* src_a,
                              const uint8_t* src_b,
                              int count);
+LIBYUV_TARGETING("avx2")
 uint32_t SumSquareError_AVX2(const uint8_t* src_a,
                              const uint8_t* src_b,
                              int count);
@@ -121,7 +126,9 @@ uint32_t SumSquareError_MSA(const uint8_t* src_a,
                             int count);
 
 uint32_t HashDjb2_C(const uint8_t* src, int count, uint32_t seed);
+LIBYUV_TARGETING("sse4.1")
 uint32_t HashDjb2_SSE41(const uint8_t* src, int count, uint32_t seed);
+LIBYUV_TARGETING("avx2")
 uint32_t HashDjb2_AVX2(const uint8_t* src, int count, uint32_t seed);
 
 #ifdef __cplusplus

@@ -61,4 +61,14 @@ typedef int8_t int8;
 #define LIBYUV_FALSE 0
 #define LIBYUV_TRUE 1
 
+/* To enable SIMD functions for x86 with gcc >= 4.9 by using target attributes: */
+#if defined(__i386__) && defined(__GNUC__) && (__GNUC__ + (__GNUC_MINOR__ >= 9) > 4) /* gcc >= 4.9 */
+# define GCC_X86_TARGET_ATTRIBS
+#endif
+#ifdef GCC_X86_TARGET_ATTRIBS
+# define LIBYUV_TARGETING(x) __attribute__((target(x)))
+#else
+# define LIBYUV_TARGETING(x)
+#endif
+
 #endif  // INCLUDE_LIBYUV_BASIC_TYPES_H_
