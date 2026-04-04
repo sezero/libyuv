@@ -53,6 +53,8 @@ check_library_exists(m log10 "" HAVE_LIBM)
 
 # this creates the static library (.a)
 ADD_LIBRARY				( ${ly_lib_static} STATIC ${ly_source_files} )
+# allow creating shared lib from static libyuv:
+SET_TARGET_PROPERTIES			( ${ly_lib_static} PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
 
 # this creates the shared library (.so)
 ADD_LIBRARY				( ${ly_lib_shared} SHARED ${ly_source_files} )
