@@ -1,7 +1,7 @@
 # CMakeLists for libyuv
 
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2...4.0)
 PROJECT ( YUV C )
-CMAKE_MINIMUM_REQUIRED( VERSION 3.2 )
 
 include(CMakePushCheckState)
 include(CheckCSourceCompiles)
