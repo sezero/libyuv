@@ -15,6 +15,7 @@
 #include <time.h>
 
 #include <new>
+#include <vector>
 
 #include "../unit_test/unit_test.h"
 #include "libyuv/cpu_id.h"
@@ -41,6 +42,11 @@
 #endif
 
 namespace libyuv {
+
+namespace {
+using ::testing::Combine;
+using ::testing::Values;
+}  // namespace
 
 #ifdef ENABLE_ROW_TESTS
 #ifdef HAS_SCALEROWDOWN2_SSSE3
@@ -533,5 +539,156 @@ TEST_F(LibYUVScaleTest, ScalePlaneVertical_IntStrideOverflow) {
   delete[] src;
   delete[] dst;
 }
+struct ScaleTestParams {
+  std::vector<std::vector<int>> src_data;
+  std::vector<std::vector<int>> dst_data;
+  FilterMode filter_mode;
+};
+
+class ScalePlaneTest
+    : public LibYUVScaleTest,
+      public ::testing::WithParamInterface<std::tuple<ScaleTestParams, bool>> {
+};
+
+TEST_P(ScalePlaneTest, Mismatch) {
+  const ScaleTestParams& params = std::get<0>(GetParam());
+  bool use_c_only = std::get<1>(GetParam());
+  const int src_height = params.src_data.size();
+  const int src_width = params.src_data[0].size();
+  const int dst_height = params.dst_data.size();
+  const int dst_width = params.dst_data[0].size();
+  const int size = src_width * src_height;
+
+  align_buffer_page_end(src_pixels, size);
+  align_buffer_page_end(dst_pixels, dst_width * dst_height);
+
+  for (int y = 0; y < src_height; ++y) {
+    for (int x = 0; x < src_width; ++x) {
+      src_pixels[y * src_width + x] =
+          static_cast<uint8_t>(params.src_data[y][x]);
+    }
+  }
+  memset(dst_pixels, 0, dst_width * dst_height);
+
+  MaskCpuFlags(use_c_only ? disable_cpu_flags_ : benchmark_cpu_info_);
+
+  ScalePlane(src_pixels, src_width, src_width, src_height, dst_pixels,
+             dst_width, dst_width, dst_height, params.filter_mode);
+
+  bool has_mismatch = false;
+  for (int y = 0; y < dst_height; ++y) {
+    for (int x = 0; x < dst_width; ++x) {
+      if (dst_pixels[y * dst_width + x] !=
+          static_cast<uint8_t>(params.dst_data[y][x])) {
+        has_mismatch = true;
+        break;
+      }
+    }
+    if (has_mismatch)
+      break;
+  }
+  EXPECT_FALSE(has_mismatch);
+
+  free_aligned_buffer_page_end(dst_pixels);
+  free_aligned_buffer_page_end(src_pixels);
+}
+
+TEST_P(ScalePlaneTest, Mismatch16) {
+  const ScaleTestParams& params = std::get<0>(GetParam());
+  bool use_c_only = std::get<1>(GetParam());
+  const int src_height = params.src_data.size();
+  const int src_width = params.src_data[0].size();
+  const int dst_height = params.dst_data.size();
+  const int dst_width = params.dst_data[0].size();
+  const int size = src_width * src_height;
+
+  align_buffer_page_end(src_pixels, size * 2);
+  align_buffer_page_end(dst_pixels, dst_width * dst_height * 2);
+
+  uint16_t* src_ptr = reinterpret_cast<uint16_t*>(src_pixels);
+  uint16_t* dst_ptr = reinterpret_cast<uint16_t*>(dst_pixels);
+
+  for (int y = 0; y < src_height; ++y) {
+    for (int x = 0; x < src_width; ++x) {
+      src_ptr[y * src_width + x] = static_cast<uint16_t>(params.src_data[y][x]);
+    }
+  }
+  memset(dst_ptr, 0, dst_width * dst_height * 2);
+
+  MaskCpuFlags(use_c_only ? disable_cpu_flags_ : benchmark_cpu_info_);
+
+  ScalePlane_16(src_ptr, src_width, src_width, src_height, dst_ptr, dst_width,
+                dst_width, dst_height, params.filter_mode);
+
+  bool has_mismatch = false;
+  for (int y = 0; y < dst_height; ++y) {
+    for (int x = 0; x < dst_width; ++x) {
+      if (dst_ptr[y * dst_width + x] !=
+          static_cast<uint16_t>(params.dst_data[y][x])) {
+        has_mismatch = true;
+        break;
+      }
+    }
+    if (has_mismatch)
+      break;
+  }
+  EXPECT_FALSE(has_mismatch);
+
+  free_aligned_buffer_page_end(dst_pixels);
+  free_aligned_buffer_page_end(src_pixels);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    All,
+    ScalePlaneTest,
+    Combine(
+        Values(
+            // ScaleRowDown2Box
+            ScaleTestParams{.src_data = {{1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3}},
+                            .dst_data = {{2, 2, 2, 2},
+                                         {2, 2, 2, 2},
+                                         {2, 2, 2, 2},
+                                         {2, 2, 2, 2}},
+                            .filter_mode = kFilterBox},
+            // ScaleRowDown4Box
+            ScaleTestParams{.src_data = {{1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3},
+                                         {1, 3, 1, 3, 1, 3, 1, 3}},
+                            .dst_data = {{2, 2}, {2, 2}},
+                            .filter_mode = kFilterBox},
+            // ScaleRowDown38Box
+            ScaleTestParams{
+                .src_data =
+                    std::vector<std::vector<int>>(8, std::vector<int>(8, 1)),
+                .dst_data =
+                    std::vector<std::vector<int>>(3, std::vector<int>(3, 1)),
+                .filter_mode = kFilterBox},
+            // ScaleAddCols1_C (1/3)
+            ScaleTestParams{
+                .src_data =
+                    std::vector<std::vector<int>>(6, std::vector<int>(6, 1)),
+                .dst_data =
+                    std::vector<std::vector<int>>(2, std::vector<int>(2, 1)),
+                .filter_mode = kFilterBox},
+            // ScaleAddCols2_C (5/12)
+            ScaleTestParams{
+                .src_data =
+                    std::vector<std::vector<int>>(12, std::vector<int>(12, 1)),
+                .dst_data =
+                    std::vector<std::vector<int>>(5, std::vector<int>(5, 1)),
+                .filter_mode = kFilterBox}),
+        Values(false, true)));
 
 }  // namespace libyuv

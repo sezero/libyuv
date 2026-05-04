@@ -815,8 +815,9 @@ static void ScaleAddCols2_C(int dst_width,
     boxwidth = MIN1((x >> 16) - ix);
     int scaletbl_index = boxwidth - minboxwidth;
     assert((scaletbl_index == 0) || (scaletbl_index == 1));
-    *dst_ptr++ = (uint8_t)(SumPixels(boxwidth, src_ptr + ix) *
-                               scaletbl[scaletbl_index] >>
+    *dst_ptr++ = (uint8_t)((SumPixels(boxwidth, src_ptr + ix) *
+                                scaletbl[scaletbl_index] +
+                            32768) >>
                            16);
   }
 }
@@ -840,7 +841,9 @@ static void ScaleAddCols2_16_C(int dst_width,
     int scaletbl_index = boxwidth - minboxwidth;
     assert((scaletbl_index == 0) || (scaletbl_index == 1));
     *dst_ptr++ =
-        SumPixels_16(boxwidth, src_ptr + ix) * scaletbl[scaletbl_index] >> 16;
+        (SumPixels_16(boxwidth, src_ptr + ix) * scaletbl[scaletbl_index] +
+         32768) >>
+        16;
   }
 }
 
@@ -855,7 +858,7 @@ static void ScaleAddCols0_C(int dst_width,
   (void)dx;
   src_ptr += (x >> 16);
   for (i = 0; i < dst_width; ++i) {
-    *dst_ptr++ = (uint8_t)(src_ptr[i] * scaleval >> 16);
+    *dst_ptr++ = (uint8_t)((src_ptr[i] * scaleval + 32768) >> 16);
   }
 }
 
@@ -870,7 +873,8 @@ static void ScaleAddCols1_C(int dst_width,
   int i;
   x >>= 16;
   for (i = 0; i < dst_width; ++i) {
-    *dst_ptr++ = (uint8_t)(SumPixels(boxwidth, src_ptr + x) * scaleval >> 16);
+    *dst_ptr++ =
+        (uint8_t)((SumPixels(boxwidth, src_ptr + x) * scaleval + 32768) >> 16);
     x += boxwidth;
   }
 }
@@ -885,7 +889,7 @@ static void ScaleAddCols1_16_C(int dst_width,
   int scaleval = 65536 / (boxwidth * boxheight);
   int i;
   for (i = 0; i < dst_width; ++i) {
-    *dst_ptr++ = SumPixels_16(boxwidth, src_ptr + x) * scaleval >> 16;
+    *dst_ptr++ = (SumPixels_16(boxwidth, src_ptr + x) * scaleval + 32768) >> 16;
     x += boxwidth;
   }
 }
