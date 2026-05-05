@@ -72,8 +72,10 @@ if(APPLE)
 elseif(LINKER_SUPPORTS_WL_NO_UNDEFINED)
   target_link_libraries(${ly_lib_shared} PRIVATE -Wl,--no-undefined)
 endif()
+configure_file(libyuv.pc.in ${CMAKE_CURRENT_BINARY_DIR}/libyuv.pc @ONLY)
 
 # install the conversion tool, .so, .a, and all the header files
 INSTALL ( TARGETS ${ly_lib_static}						DESTINATION lib )
 INSTALL ( TARGETS ${ly_lib_shared} LIBRARY				DESTINATION lib RUNTIME DESTINATION bin )
+INSTALL ( FILES ${CMAKE_CURRENT_BINARY_DIR}/libyuv.pc			DESTINATION lib/pkgconfig )
 INSTALL ( DIRECTORY ${PROJECT_SOURCE_DIR}/include/		DESTINATION include )
