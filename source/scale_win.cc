@@ -748,11 +748,7 @@ __declspec(naked) void ScaleRowDown38_3_Box_SSSE3(const uint8_t* src_ptr,
     pshufb     xmm7, xmm3
     paddusw    xmm6, xmm7
 
-    movdqa     xmm7, xmm6
-    pmulhuw    xmm6, xmm4
-    pmullw     xmm7, xmm4
-    psraw      xmm7, 15
-    psubw      xmm6, xmm7  // divide by 9,9,6, 9,9,6 with round
+    pmulhuw    xmm6, xmm4  // divide by 9,9,6, 9,9,6
     packuswb   xmm6, xmm6
 
     movd       [edx], xmm6  // write 6 pixels
@@ -797,11 +793,7 @@ __declspec(naked) void ScaleRowDown38_2_Box_SSSE3(const uint8_t* src_ptr,
     pshufb     xmm0, xmm4
     paddusw    xmm1, xmm0
 
-    movdqa     xmm6, xmm1
-    pmulhuw    xmm1, xmm5
-    pmullw     xmm6, xmm5
-    psraw      xmm6, 15
-    psubw      xmm1, xmm6  // divide by 3,3,2, 3,3,2 with round
+    pmulhuw    xmm1, xmm5  // divide by 3,3,2, 3,3,2
     packuswb   xmm1, xmm1
 
     movd       [edx], xmm1  // write 6 pixels
