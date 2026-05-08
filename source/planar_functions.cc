@@ -8,6 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "libyuv/convert_from_argb.h"  // For ArgbConstants
 #include "libyuv/planar_functions.h"
 
 #include <assert.h>
@@ -15,12 +16,10 @@
 
 #include "libyuv/cpu_id.h"
 #include "libyuv/row.h"
-#include "libyuv/convert_from_argb.h"
 #include "libyuv/scale_row.h"  // for ScaleRowDown2
 
 #ifdef __cplusplus
 namespace libyuv {
-
 extern "C" {
 #endif
 
@@ -4745,8 +4744,8 @@ static int ARGBSobelize(const uint8_t* src_argb,
                                          uint8_t* dst,
                                          int width)) {
   int y;
-  void (*ARGBToYMatrixRow)(const uint8_t* src_argb, uint8_t* dst_y, int width,
-                           const struct ArgbConstants* c) = ARGBToYMatrixRow_C;
+  void (*ARGBToYJRow)(const uint8_t* src_argb, uint8_t* dst_g, int width) =
+      ARGBToYJRow_C;
   void (*SobelYRow)(const uint8_t* src_y0, const uint8_t* src_y1,
                     uint8_t* dst_sobely, int width) = SobelYRow_C;
   void (*SobelXRow)(const uint8_t* src_y0, const uint8_t* src_y1,
@@ -4763,65 +4762,57 @@ static int ARGBSobelize(const uint8_t* src_argb,
     src_stride_argb = -src_stride_argb;
   }
 
-#if defined(HAS_ARGBTOYMATRIXROW_SSSE3)
+#if defined(HAS_ARGBTOYJROW_SSSE3)
   if (TestCpuFlag(kCpuHasSSSE3)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_Any_SSSE3;
+    ARGBToYJRow = ARGBToYJRow_Any_SSSE3;
     if (IS_ALIGNED(width, 16)) {
-      ARGBToYMatrixRow = ARGBToYMatrixRow_SSSE3;
+      ARGBToYJRow = ARGBToYJRow_SSSE3;
     }
   }
 #endif
-#if defined(HAS_ARGBTOYMATRIXROW_AVX2)
+#if defined(HAS_ARGBTOYJROW_AVX2)
   if (TestCpuFlag(kCpuHasAVX2)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_Any_AVX2;
+    ARGBToYJRow = ARGBToYJRow_Any_AVX2;
     if (IS_ALIGNED(width, 32)) {
-      ARGBToYMatrixRow = ARGBToYMatrixRow_AVX2;
+      ARGBToYJRow = ARGBToYJRow_AVX2;
     }
   }
 #endif
-#if defined(HAS_ARGBTOYMATRIXROW_AVX512BW)
+#if defined(HAS_ARGBTOYROW_AVX512BW)
   if (TestCpuFlag(kCpuHasAVX512BW)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_Any_AVX512BW;
+    ARGBToYJRow = ARGBToYJRow_Any_AVX512BW;
     if (IS_ALIGNED(width, 64)) {
-      ARGBToYMatrixRow = ARGBToYMatrixRow_AVX512BW;
+      ARGBToYJRow = ARGBToYJRow_AVX512BW;
     }
   }
 #endif
-#if defined(HAS_ARGBTOYMATRIXROW_NEON)
+#if defined(HAS_ARGBTOYJROW_NEON)
   if (TestCpuFlag(kCpuHasNEON)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_Any_NEON;
+    ARGBToYJRow = ARGBToYJRow_Any_NEON;
     if (IS_ALIGNED(width, 16)) {
-      ARGBToYMatrixRow = ARGBToYMatrixRow_NEON;
+      ARGBToYJRow = ARGBToYJRow_NEON;
     }
   }
 #endif
-#if defined(HAS_ARGBTOYMATRIXROW_NEON_DOTPROD)
-  if (TestCpuFlag(kCpuHasNeonDotProd)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_Any_NEON_DotProd;
-    if (IS_ALIGNED(width, 16)) {
-      ARGBToYMatrixRow = ARGBToYMatrixRow_NEON_DotProd;
-    }
-  }
-#endif
-#if defined(HAS_ARGBTOYMATRIXROW_LSX)
+#if defined(HAS_ARGBTOYJROW_LSX)
   if (TestCpuFlag(kCpuHasLSX)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_Any_LSX;
+    ARGBToYJRow = ARGBToYJRow_Any_LSX;
     if (IS_ALIGNED(width, 16)) {
-      ARGBToYMatrixRow = ARGBToYMatrixRow_LSX;
+      ARGBToYJRow = ARGBToYJRow_LSX;
     }
   }
 #endif
-#if defined(HAS_ARGBTOYMATRIXROW_LASX)
+#if defined(HAS_ARGBTOYJROW_LASX)
   if (TestCpuFlag(kCpuHasLASX)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_Any_LASX;
+    ARGBToYJRow = ARGBToYJRow_Any_LASX;
     if (IS_ALIGNED(width, 32)) {
-      ARGBToYMatrixRow = ARGBToYMatrixRow_LASX;
+      ARGBToYJRow = ARGBToYJRow_LASX;
     }
   }
 #endif
-#if defined(HAS_ARGBTOYMATRIXROW_RVV)
+#if defined(HAS_ARGBTOYJROW_RVV)
   if (TestCpuFlag(kCpuHasRVV)) {
-    ARGBToYMatrixRow = ARGBToYMatrixRow_RVV;
+    ARGBToYJRow = ARGBToYJRow_RVV;
   }
 #endif
 
@@ -4859,10 +4850,10 @@ static int ARGBSobelize(const uint8_t* src_argb,
     uint8_t* row_y2 = row_y1 + row_size;
     if (!rows)
       return 1;
-    ARGBToYMatrixRow(src_argb, row_y0, width, &kArgbJPEGConstants);
+    ARGBToYJRow(src_argb, row_y0, width);
     row_y0[-1] = row_y0[0];
     memset(row_y0 + width, row_y0[width - 1], 16);  // Extrude 16 for valgrind.
-    ARGBToYMatrixRow(src_argb, row_y1, width, &kArgbJPEGConstants);
+    ARGBToYJRow(src_argb, row_y1, width);
     row_y1[-1] = row_y1[0];
     memset(row_y1 + width, row_y1[width - 1], 16);
     memset(row_y2 + width, 0, 16);
@@ -4872,7 +4863,7 @@ static int ARGBSobelize(const uint8_t* src_argb,
       if (y < (height - 1)) {
         src_argb += src_stride_argb;
       }
-      ARGBToYMatrixRow(src_argb, row_y2, width, &kArgbJPEGConstants);
+      ARGBToYJRow(src_argb, row_y2, width);
       row_y2[-1] = row_y2[0];
       row_y2[width] = row_y2[width - 1];
 
