@@ -1536,9 +1536,9 @@ void ScaleUVColsUp2_C(uint8_t* dst_uv,
   }
 }
 
-// TODO(fbarchard): Replace 0x7f ^ f with 128-f.  bug=607.
-// Mimics SSSE3 blender
-#define BLENDER1(a, b, f) ((a) * (0x7f ^ f) + (b)*f) >> 7
+// Performs (a + ((f * (b - a) + 64) >> 7)) which is equivalent of
+// ((a * (128 - f) + b * f + 64) >> 7).
+#define BLENDER1(a, b, f) ((a) + (((f) * ((b) - (a)) + 64) >> 7))
 #define BLENDERC(a, b, f, s) \
   (uint16_t)(BLENDER1(((a) >> s) & 255, ((b) >> s) & 255, f) << s)
 #define BLENDER(a, b, f) BLENDERC(a, b, f, 8) | BLENDERC(a, b, f, 0)
