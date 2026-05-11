@@ -307,7 +307,7 @@ void RGBToARGBRow_AVX512BW(const uint8_t* src_raw, uint8_t* dst_argb, const uint
         "+r"(width)                     // %2
       : "m"(kPermdRAWToARGB_AVX512BW),  // %3
         "m"(*shuffler)                  // %4
-      : "memory", "cc", "rax", "k1", "zmm0", "zmm1", "zmm2", "zmm3", "zmm4", "zmm5", "zmm6");
+      : "memory", "cc", "rax", "k1", "xmm0", "xmm1", "xmm2", "xmm3", "xmm4", "xmm5", "xmm6");
 }
 
 void RAWToARGBRow_AVX512BW(const uint8_t* src_raw, uint8_t* dst_argb, int width) {
@@ -1615,8 +1615,8 @@ void ARGBToYMatrixRow_AVX512BW(const uint8_t* src_argb,
         "+r"(width)      // %2
       : "r"(c),          // %3
         "m"(kPermdARGBToY_AVX512BW) // %4
-      : "memory", "cc", "zmm0", "zmm1", "zmm2", "zmm3", "zmm4", "zmm5", "zmm6",
-        "zmm7", "zmm16");
+      : "memory", "cc", "xmm0", "xmm1", "xmm2", "xmm3", "xmm4", "xmm5", "xmm6",
+        "xmm7", "xmm16");
 }
 #endif
 
@@ -1757,8 +1757,8 @@ void ARGBToUV444MatrixRow_AVX2(const uint8_t* src_argb,
 #endif
       : "r"(c),                 // %4
         "m"(kPermdARGBToY_AVX)  // %5
-      : "memory", "cc", "ymm0", "ymm1", "ymm2", "ymm3", "ymm4", "ymm5", "ymm6",
-        "ymm7");
+      : "memory", "cc", "xmm0", "xmm1", "xmm2", "xmm3", "xmm4", "xmm5", "xmm6",
+        "xmm7");
 }
 #endif  // HAS_ARGBTOUV444ROW_AVX2
 
@@ -1837,8 +1837,8 @@ void ARGBToUV444MatrixRow_AVX512BW(const uint8_t* src_argb,
 #endif
       : "r"(c),                      // %4
         "m"(kPermdARGBToY_AVX512BW)  // %5
-      : "memory", "cc", "zmm0", "zmm1", "zmm2", "zmm3", "zmm4", "zmm5", "zmm6",
-        "zmm7", "zmm16");
+      : "memory", "cc", "xmm0", "xmm1", "xmm2", "xmm3", "xmm4", "xmm5", "xmm6",
+        "xmm7", "xmm16");
 }
 #endif  // HAS_ARGBTOUV444ROW_AVX512BW
 
@@ -2298,8 +2298,8 @@ void ARGBToUVMatrixRow_AVX512BW(const uint8_t* src_argb,
         "m"(kShuffleAARRGGBB),              // %6
         "m"(kPermdARGBToY_AVX512BW),        // %7
         "m"(kPermdARGBToUV_AVX512BW)        // %8
-      : "memory", "cc", "zmm0", "zmm1", "zmm2", "zmm3", "zmm4", "zmm5", "zmm6",
-        "zmm7", "zmm16", "zmm17", "zmm18", "zmm19");
+      : "memory", "cc", "xmm0", "xmm1", "xmm2", "xmm3", "xmm4", "xmm5", "xmm6",
+        "xmm7", "xmm16", "xmm17", "xmm18", "xmm19");
 }
 
 void ARGBToUVRow_AVX512BW(const uint8_t* src_argb,
