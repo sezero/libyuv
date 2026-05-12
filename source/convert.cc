@@ -2426,23 +2426,6 @@ int BGRAToI422(const uint8_t* src_bgra,
                           width, height);
 }
 
-// Convert ABGR to I420.
-LIBYUV_API
-int ABGRToI420(const uint8_t* src_abgr,
-               int src_stride_abgr,
-               uint8_t* dst_y,
-               int dst_stride_y,
-               uint8_t* dst_u,
-               int dst_stride_u,
-               uint8_t* dst_v,
-               int dst_stride_v,
-               int width,
-               int height) {
-  return ARGBToI420Matrix(src_abgr, src_stride_abgr, dst_y, dst_stride_y, dst_u,
-                          dst_stride_u, dst_v, dst_stride_v, &kAbgrI601Constants,
-                          width, height);
-}
-
 // Convert ABGR to I422.
 LIBYUV_API
 int ABGRToI422(const uint8_t* src_abgr,
@@ -2460,23 +2443,6 @@ int ABGRToI422(const uint8_t* src_abgr,
                           width, height);
 }
 
-// Convert RGBA to I420.
-LIBYUV_API
-int RGBAToI420(const uint8_t* src_rgba,
-               int src_stride_rgba,
-               uint8_t* dst_y,
-               int dst_stride_y,
-               uint8_t* dst_u,
-               int dst_stride_u,
-               uint8_t* dst_v,
-               int dst_stride_v,
-               int width,
-               int height) {
-  return ARGBToI420Matrix(src_rgba, src_stride_rgba, dst_y, dst_stride_y, dst_u,
-                          dst_stride_u, dst_v, dst_stride_v, &kRgbaI601Constants,
-                          width, height);
-}
-
 // Convert RGBA to I422.
 LIBYUV_API
 int RGBAToI422(const uint8_t* src_rgba,
@@ -2490,6 +2456,40 @@ int RGBAToI422(const uint8_t* src_rgba,
                int width,
                int height) {
   return ARGBToI422Matrix(src_rgba, src_stride_rgba, dst_y, dst_stride_y, dst_u,
+                          dst_stride_u, dst_v, dst_stride_v, &kRgbaI601Constants,
+                          width, height);
+}
+
+// Convert ABGR to I420.
+LIBYUV_API
+int ABGRToI420(const uint8_t* src_abgr,
+               int src_stride_abgr,
+               uint8_t* dst_y,
+               int dst_stride_y,
+               uint8_t* dst_u,
+               int dst_stride_u,
+               uint8_t* dst_v,
+               int dst_stride_v,
+               int width,
+               int height) {
+  return ARGBToI420Matrix(src_abgr, src_stride_abgr, dst_y, dst_stride_y, dst_u,
+                          dst_stride_u, dst_v, dst_stride_v, &kAbgrI601Constants,
+                          width, height);
+}
+
+// Convert RGBA to I420.
+LIBYUV_API
+int RGBAToI420(const uint8_t* src_rgba,
+               int src_stride_rgba,
+               uint8_t* dst_y,
+               int dst_stride_y,
+               uint8_t* dst_u,
+               int dst_stride_u,
+               uint8_t* dst_v,
+               int dst_stride_v,
+               int width,
+               int height) {
+  return ARGBToI420Matrix(src_rgba, src_stride_rgba, dst_y, dst_stride_y, dst_u,
                           dst_stride_u, dst_v, dst_stride_v, &kRgbaI601Constants,
                           width, height);
 }
@@ -2581,7 +2581,6 @@ int RGB24ToI420(const uint8_t* src_rgb24,
     ARGBToYMatrixRow = ARGBToYMatrixRow_RVV;
   }
 #endif
-
 
   if (!src_rgb24 || !dst_y || !dst_u || !dst_v || width <= 0 || height == 0) {
     return -1;
@@ -3017,7 +3016,6 @@ int RAWToI420(const uint8_t* src_raw,
     ARGBToYMatrixRow = ARGBToYMatrixRow_RVV;
   }
 #endif
-
 
   if (!src_raw || !dst_y || !dst_u || !dst_v || width <= 0 || height == 0) {
     return -1;
@@ -4641,7 +4639,6 @@ int RAWToJ400(const uint8_t* src_raw,
     ARGBToYMatrixRow = ARGBToYMatrixRow_RVV;
   }
 #endif
-
 
   if (!src_raw || !dst_yj || width <= 0 || height == 0) {
     return -1;
